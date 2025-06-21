@@ -113,12 +113,16 @@ async def generate_route(request: RouteRequest):
         route_indices = tsp_solver.solve_tsp(distance_matrix, params["max_distance_km"])
         print(f"Route indices: {route_indices}")
 
-        # Step 7: Build optimized route
-        print("Step 7: Building optimized route...")
+        # Step 7: Build optimized route with per-leg distance and duration
         optimized_pois = []
         route_points = []
-
         for i, idx in enumerate(route_indices):
+            distance_from_prev = None
+            duration_from_prev = None
+            if i > 0:
+                from_idx = route_indices[i-1]
+                distance_from_prev = distance_matrix[from_idx][idx]
+                duration_from_prev = duration_matrix[from_idx][idx]
             if idx == 0:
                 # Start location
                 point = RoutePoint(
@@ -127,6 +131,8 @@ async def generate_route(request: RouteRequest):
                     lng=start_coords["lng"],
                     script=f"Welcome to {params['start_location']}! This is where your journey begins.",
                     category="start",
+                    distance_from_prev=distance_from_prev,
+                    duration_from_prev=duration_from_prev,
                 )
             else:
                 # POI
@@ -138,12 +144,11 @@ async def generate_route(request: RouteRequest):
                     lng=poi["lng"],
                     script=script,
                     category=poi["category"],
+                    distance_from_prev=distance_from_prev,
+                    duration_from_prev=duration_from_prev,
                 )
-
             optimized_pois.append(
-                poi
-                if idx > 0
-                else {
+                poi if idx > 0 else {
                     "name": params["start_location"],
                     "lat": start_coords["lat"],
                     "lng": start_coords["lng"],

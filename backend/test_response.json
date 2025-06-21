@@ -1,10 +1,10 @@
 {
   "route": {
-    "id": "2025-06-21T18:11:00.515278",
+    "id": "2025-06-21T18:40:08.924137",
     "total_distance_km": 13.446200000000001,
     "estimated_duration_minutes": 29.678333333333335,
     "waypoints": 5,
-    "created_at": "2025-06-21T18:11:00.515278"
+    "created_at": "2025-06-21T18:40:08.924137"
   },
   "points": [
     {
@@ -12,35 +12,45 @@
       "lat": 43.6426,
       "lng": -79.3871,
       "script": "Welcome to CN Tower! This is where your journey begins.",
-      "category": "start"
+      "category": "start",
+      "distance_from_prev": null,
+      "duration_from_prev": null
     },
     {
       "name": "Art Gallery of Ontario",
       "lat": 43.6537,
       "lng": -79.3922,
-      "script": "Hey there! Welcome to the Art Gallery of Ontario, or the AGO as we call it! Get ready to be amazed! We've got everything from iconic Canadian masterpieces by the Group of Seven to cutting-edge contemporary art. Did you know the AGO houses over 95,000 works? One of our highlights is the Thomson Collection, showcasing European masterpieces!\n\nSo, grab a map, take a deep breath, and get ready to lose yourself in art. I encourage you to truly observe each piece, let it speak to you, and uncover the stories they tell. Happy exploring!",
-      "category": "tourism"
+      "script": "Hey everyone, welcome to the AGO! I'm so glad you're here. This place is packed with incredible art, from Canadian masters like the Group of Seven to stunning international works. Did you know the AGO houses the largest collection of Canadian art? Be sure to check out the modern collections too! They\u2019re very intriguing. Now, let\u2019s head inside and dive in. I encourage you to take your time, let the art speak to you, and discover your own personal favorites. Happy exploring!",
+      "category": "tourism",
+      "distance_from_prev": 2.4794,
+      "duration_from_prev": 4.033333333333333
     },
     {
       "name": "Royal Ontario Museum",
       "lat": 43.6677,
       "lng": -79.3948,
-      "script": "Hey everyone, welcome to the Royal Ontario Museum, or the ROM as we locals call it! Get ready to be amazed. We're talking dinosaurs, ancient Egypt, world cultures, you name it! Fun fact: This building is actually two different architectural styles mashed together, making it quite a unique landmark. I recommend starting with our dinosaur gallery, some of the best fossils in North America are right here. Now, go forth and explore! What wonders will *you* discover today? Take a closer look and see what stories they will tell.",
-      "category": "tourism"
+      "script": "Hey everyone, welcome to the ROM! I'm thrilled to show you around. Did you know we house over 13 million artifacts and artworks? We're talking dinosaurs, ancient Egypt, dazzling gems, and incredible Canadian art \u2013 a real feast for the eyes! Today, we'll focus on the highlights, but honestly, you could spend days here. Don't miss the iconic totem poles in our First Peoples gallery, they're simply breathtaking. Now, let's dive in and start exploring! Observe the artifacts!",
+      "category": "tourism",
+      "distance_from_prev": 2.5243,
+      "duration_from_prev": 6.923333333333333
     },
     {
       "name": "Casa Loma",
       "lat": 43.678,
       "lng": -79.4095,
-      "script": "Welcome to Casa Loma, your very own fairytale castle right here in Toronto! Isn't it magnificent? Can you believe Sir Henry Pellatt built this in the early 1900s, dreaming of a medieval masterpiece? It even boasts secret passages and a stunning view from the towers. Fun fact: It was once used as a set for a movie! Take a moment to imagine what life was like for the Pellatts. Now, go explore the grand halls, the secret tunnels, and enjoy this amazing architectural masterpiece. You never know what secrets you might uncover!",
-      "category": "historic"
+      "script": "Welcome to Casa Loma, Toronto's majestic castle! Built by Sir Henry Pellatt, a true visionary, this place is bursting with history and secrets. Did you know it cost a cool $3.5 million back in 1914? Imagine the parties thrown in this grand ballroom! Take a moment to picture life in the early 20th century, then step inside and explore the secret tunnels, the stables, and the stunning views from the towers. There's so much to see! Let's go discover the magic of Casa Loma together.",
+      "category": "historic",
+      "distance_from_prev": 3.0624000000000002,
+      "duration_from_prev": 7.368333333333334
     },
     {
       "name": "CN Tower",
       "lat": 43.6426,
       "lng": -79.3871,
-      "script": "Hey everyone, welcome to the iconic CN Tower! Get ready for breathtaking views. Did you know \"CN\" originally stood for Canadian National, the railway company that built it? Pretty cool, huh? We're heading up to see Toronto like never before. The glass floor offers an incredible, and slightly terrifying, perspective! Make sure to check out the 360 Restaurant for fine dining with a revolving view. Now, let's get going and explore this architectural marvel! Don't forget to take a moment to observe the city spread out before you. Enjoy!",
-      "category": "tourism"
+      "script": "Hey there! Welcome to the CN Tower, Toronto's iconic landmark! Did you know it was once the tallest freestanding structure in the world? Pretty impressive, right? Get ready for breathtaking views from up here! We'll whisk you up in a super-fast elevator \u2013 feel your ears pop! Take a stroll on the glass floor if you dare, and enjoy incredible 360-degree panoramas. From the bustling city below to the vast expanse of Lake Ontario, it's a sight you won't forget. Now, go on and explore the magnificent views!",
+      "category": "tourism",
+      "distance_from_prev": 5.3801000000000005,
+      "duration_from_prev": 10.123333333333333
     }
   ],
   "geojson": {
@@ -74,7 +84,7 @@
         "properties": {
           "name": "Art Gallery of Ontario",
           "category": "tourism",
-          "script": "Hey there! Welcome to the Art Gallery of Ontario, or the AGO as we call it! Get ready to be amazed! We've got everything from iconic Canadian masterpieces by the Group of Seven to cutting-edge contemporary art. Did you know the AGO houses over 95,000 works? One of our highlights is the Thomson Collection, showcasing European masterpieces!\n\nSo, grab a map, take a deep breath, and get ready to lose yourself in art. I encourage you to truly observe each piece, let it speak to you, and uncover the stories they tell. Happy exploring!",
+          "script": "Hey everyone, welcome to the AGO! I'm so glad you're here. This place is packed with incredible art, from Canadian masters like the Group of Seven to stunning international works. Did you know the AGO houses the largest collection of Canadian art? Be sure to check out the modern collections too! They\u2019re very intriguing. Now, let\u2019s head inside and dive in. I encourage you to take your time, let the art speak to you, and discover your own personal favorites. Happy exploring!",
           "order": 1
         }
       },
@@ -90,7 +100,7 @@
         "properties": {
           "name": "Royal Ontario Museum",
           "category": "tourism",
-          "script": "Hey everyone, welcome to the Royal Ontario Museum, or the ROM as we locals call it! Get ready to be amazed. We're talking dinosaurs, ancient Egypt, world cultures, you name it! Fun fact: This building is actually two different architectural styles mashed together, making it quite a unique landmark. I recommend starting with our dinosaur gallery, some of the best fossils in North America are right here. Now, go forth and explore! What wonders will *you* discover today? Take a closer look and see what stories they will tell.",
+          "script": "Hey everyone, welcome to the ROM! I'm thrilled to show you around. Did you know we house over 13 million artifacts and artworks? We're talking dinosaurs, ancient Egypt, dazzling gems, and incredible Canadian art \u2013 a real feast for the eyes! Today, we'll focus on the highlights, but honestly, you could spend days here. Don't miss the iconic totem poles in our First Peoples gallery, they're simply breathtaking. Now, let's dive in and start exploring! Observe the artifacts!",
           "order": 2
         }
       },
@@ -106,7 +116,7 @@
         "properties": {
           "name": "Casa Loma",
           "category": "historic",
-          "script": "Welcome to Casa Loma, your very own fairytale castle right here in Toronto! Isn't it magnificent? Can you believe Sir Henry Pellatt built this in the early 1900s, dreaming of a medieval masterpiece? It even boasts secret passages and a stunning view from the towers. Fun fact: It was once used as a set for a movie! Take a moment to imagine what life was like for the Pellatts. Now, go explore the grand halls, the secret tunnels, and enjoy this amazing architectural masterpiece. You never know what secrets you might uncover!",
+          "script": "Welcome to Casa Loma, Toronto's majestic castle! Built by Sir Henry Pellatt, a true visionary, this place is bursting with history and secrets. Did you know it cost a cool $3.5 million back in 1914? Imagine the parties thrown in this grand ballroom! Take a moment to picture life in the early 20th century, then step inside and explore the secret tunnels, the stables, and the stunning views from the towers. There's so much to see! Let's go discover the magic of Casa Loma together.",
           "order": 3
         }
       },
@@ -122,7 +132,7 @@
         "properties": {
           "name": "CN Tower",
           "category": "tourism",
-          "script": "Hey everyone, welcome to the iconic CN Tower! Get ready for breathtaking views. Did you know \"CN\" originally stood for Canadian National, the railway company that built it? Pretty cool, huh? We're heading up to see Toronto like never before. The glass floor offers an incredible, and slightly terrifying, perspective! Make sure to check out the 360 Restaurant for fine dining with a revolving view. Now, let's get going and explore this architectural marvel! Don't forget to take a moment to observe the city spread out before you. Enjoy!",
+          "script": "Hey there! Welcome to the CN Tower, Toronto's iconic landmark! Did you know it was once the tallest freestanding structure in the world? Pretty impressive, right? Get ready for breathtaking views from up here! We'll whisk you up in a super-fast elevator \u2013 feel your ears pop! Take a stroll on the glass floor if you dare, and enjoy incredible 360-degree panoramas. From the bustling city below to the vast expanse of Lake Ontario, it's a sight you won't forget. Now, go on and explore the magnificent views!",
           "order": 4
         }
       },

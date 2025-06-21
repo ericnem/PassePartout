@@ -18,6 +18,8 @@ class RoutePoint(BaseModel):
     lng: float
     script: str
     category: str
+    distance_from_prev: Optional[float] = None  # in km
+    duration_from_prev: Optional[float] = None  # in minutes
 
 
 class RouteResponse(BaseModel):
