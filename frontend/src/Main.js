@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import MapComponent from "./MapComponent";
 import routeData from './test_response.json';
 
-
-export default function Component() {
+export default function MainPage({currentLocation}) {
   const [useCurrentLocation, setUseCurrentLocation] = useState(false);
 
   // Read from JSON file - replace with actual API response
@@ -60,7 +59,7 @@ export default function Component() {
         </div>
 
         <div style={{ flex: 1, border: "2px solid #ccc", borderRadius: "8px", position: "relative" }}>
-          <MapComponent />
+          <MapComponent currentLocation = {currentLocation}/>
         </div>
 
         <div style={{ width: "300px", border: "1px solid #ccc", borderRadius: "8px", padding: "1rem" }}>
