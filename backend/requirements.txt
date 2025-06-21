@@ -1,0 +1,1 @@
+fastapi uvicorn pymongo python-dotenv google-generativeai
