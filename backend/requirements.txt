@@ -1,1 +1,9 @@
-fastapi uvicorn pymongo python-dotenv google-generativeai
+fastapi==0.104.1
+uvicorn==0.24.0
+python-dotenv==1.0.0
+google-generativeai
+pydantic==2.5.0
+httpx==0.25.2
+ortools
+geojson==3.1.0
+requests==2.31.0
