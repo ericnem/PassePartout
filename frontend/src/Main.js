@@ -40,9 +40,20 @@ export default function MainPage({currentLocation}) {
           <div style={{ border: "1px solid orange", borderRadius: "8px", padding: "1rem" }}>
             <h3>Route</h3>
             <ul>
-              {pointInfo.map((point, index) => (
-                <li key={index}>{point.name}</li>
-              ))}
+              {pointInfo.map((point, index) => {
+                // Use duration_from_prev field for timing (except first point)
+                let timeDisplay = "";
+                if (index > 0 && point.duration_from_prev !== null) {
+                  const durationMinutes = Math.round(point.duration_from_prev);
+                  timeDisplay = ` (${durationMinutes} min)`;
+                }
+                
+                return (
+                  <li key={index}>
+                    {point.name}{timeDisplay}
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
