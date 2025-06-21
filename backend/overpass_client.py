@@ -54,7 +54,7 @@ class OverpassClient:
         unique_pois = []
         seen_names = set()
         for poi in pois:
-            if poi["name"] not in seen_names and len(unique_pois) < 20:
+            if poi["name"] not in seen_names and len(unique_pois) < 10:  # Cap at 10 POIs
                 unique_pois.append(poi)
                 seen_names.add(poi["name"])
         
@@ -163,7 +163,7 @@ class OverpassClient:
                 unique_mock_pois.append(poi)
                 seen_names.add(poi["name"])
         
-        return unique_mock_pois[:10]  # Limit to 10 POIs
+        return unique_mock_pois[:10]  # Cap at 10 POIs
     
     def _query_overpass(self, lat: float, lng: float, radius_km: float, tag: str) -> List[Dict[str, Any]]:
         """
@@ -173,7 +173,7 @@ class OverpassClient:
             lat: Center latitude
             lng: Center longitude
             radius_km: Search radius in kilometers
-            tag: OSM tag to search for
+            tag: OSM tag to search for (format: "key=value")
             
         Returns:
             List of POI dictionaries
@@ -181,15 +181,42 @@ class OverpassClient:
         # Convert radius to meters
         radius_m = radius_km * 1000
         
-        query = f"""
-        [out:json][timeout:25];
-        (
-          node["{tag}"](around:{radius_m},{lat},{lng});
-          way["{tag}"](around:{radius_m},{lat},{lng});
-          relation["{tag}"](around:{radius_m},{lat},{lng});
-        );
-        out center;
-        """
+        # Parse the tag into key and value
+        if "=" in tag:
+            key, value = tag.split("=", 1)
+            if value == "*":
+                # For wildcard searches, use just the key
+                query = f"""
+                [out:json][timeout:25];
+                (
+                  node["{key}"](around:{radius_m},{lat},{lng});
+                  way["{key}"](around:{radius_m},{lat},{lng});
+                  relation["{key}"](around:{radius_m},{lat},{lng});
+                );
+                out center;
+                """
+            else:
+                # For specific value searches, use key=value syntax
+                query = f"""
+                [out:json][timeout:25];
+                (
+                  node["{key}"="{value}"](around:{radius_m},{lat},{lng});
+                  way["{key}"="{value}"](around:{radius_m},{lat},{lng});
+                  relation["{key}"="{value}"](around:{radius_m},{lat},{lng});
+                );
+                out center;
+                """
+        else:
+            # If no equals sign, treat as just a key
+            query = f"""
+            [out:json][timeout:25];
+            (
+              node["{tag}"](around:{radius_m},{lat},{lng});
+              way["{tag}"](around:{radius_m},{lat},{lng});
+              relation["{tag}"](around:{radius_m},{lat},{lng});
+            );
+            out center;
+            """
         
         try:
             response = self.session.get(self.OVERPASS_URL, params={"data": query})
@@ -215,7 +242,7 @@ class OverpassClient:
                     "name": name,
                     "lat": lat_elem,
                     "lng": lng_elem,
-                    "category": tag.split("=")[0],
+                    "category": tag.split("=")[0] if "=" in tag else tag,
                     "tags": element.get("tags", {})
                 })
             

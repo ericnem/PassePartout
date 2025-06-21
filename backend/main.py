@@ -123,9 +123,20 @@ async def generate_route(request: RouteRequest):
                     category="start"
                 )
             else:
-                # POI
+                # POI - use fallback script to avoid rate limits
                 poi = pois[idx - 1]
-                script = script_generator.generate_script(poi)
+                
+                # Only generate AI script for the first 3 POIs to avoid rate limits
+                if i <= 3:
+                    try:
+                        script = script_generator.generate_script(poi)
+                    except Exception as e:
+                        print(f"Using fallback script for {poi['name']}: {e}")
+                        script = f"Welcome to {poi['name']}! This is a great spot to explore and discover what makes Toronto special."
+                else:
+                    # Use simple fallback script for remaining POIs
+                    script = f"Here's {poi['name']}, another interesting location on your walking tour of Toronto."
+                
                 point = RoutePoint(
                     name=poi["name"],
                     lat=poi["lat"],

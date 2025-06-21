@@ -17,8 +17,8 @@ class TSPSolver:
         Solve TSP to find optimal route
         
         Args:
-            distance_matrix: Distance matrix between all points
-            max_distance: Maximum allowed route distance
+            distance_matrix: Distance matrix between all points (in km)
+            max_distance: Maximum allowed route distance (in km)
             
         Returns:
             List of indices representing optimal route order
@@ -31,19 +31,21 @@ class TSPSolver:
         self.routing = pywrapcp.RoutingModel(self.manager)
         
         def distance_callback(from_index, to_index):
-            """Returns the distance between the two nodes."""
+            """Returns the distance between the two nodes in meters."""
             from_node = self.manager.IndexToNode(from_index)
             to_node = self.manager.IndexToNode(to_index)
-            return distance_matrix[from_node][to_node]
+            # Convert km to meters and return as integer
+            return int(distance_matrix[from_node][to_node] * 1000)
         
         transit_callback_index = self.routing.RegisterTransitCallback(distance_callback)
         self.routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
         
-        # Add distance constraint
+        # Add distance constraint (convert km to meters)
+        max_distance_meters = int(max_distance * 1000)
         self.routing.AddDimension(
             transit_callback_index,
             0,  # no slack
-            max_distance,  # maximum distance per vehicle
+            max_distance_meters,  # maximum distance per vehicle (in meters)
             True,  # start cumul to zero
             "Distance"
         )
