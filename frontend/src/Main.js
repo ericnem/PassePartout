@@ -1,8 +1,26 @@
 import React, { useState } from "react";
 import MapComponent from "./MapComponent";
+import routeData from './test_response.json';
+
 
 export default function Component() {
   const [useCurrentLocation, setUseCurrentLocation] = useState(false);
+
+  // Read from JSON file - replace with actual API response
+  const allRouteData = routeData;
+  const routeInfo = allRouteData.route;
+  const pointInfo = allRouteData.points;
+  
+  // Calculate ETA based on current time + duration
+  const calculateETA = (durationMinutes) => {
+    const now = new Date();
+    const eta = new Date(now.getTime() + durationMinutes * 60000);
+    return eta.toLocaleTimeString('en-US', { 
+      hour: 'numeric', 
+      minute: '2-digit',
+      hour12: true 
+    });
+  };
 
   return (
     <div style={{ height: "100vh", display: "flex", flexDirection: "column", background: "#f9fafb" }}>
@@ -15,17 +33,17 @@ export default function Component() {
         <div style={{ width: "250px", display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div style={{ border: "1px solid orange", borderRadius: "8px", padding: "1rem" }}>
             <h3>Trip Info</h3>
-            <p>Distance: 18km</p>
-            <p>ETA: 3:54 PM</p>
+            <p>Distance: {routeInfo.total_distance_km.toFixed(1)}km</p>
+            <p>ETA: {calculateETA(routeInfo.estimated_duration_minutes)}</p>
             <p>Calories: 500 Kcal</p>
           </div>
 
           <div style={{ border: "1px solid orange", borderRadius: "8px", padding: "1rem" }}>
             <h3>Route</h3>
             <ul>
-              <li>Times Square (10 min)</li>
-              <li>Central Park (23 min)</li>
-              <li>NYU</li>
+              {pointInfo.map((point, index) => (
+                <li key={index}>{point.name}</li>
+              ))}
             </ul>
           </div>
 
