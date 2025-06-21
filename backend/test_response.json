@@ -1,10 +1,10 @@
 {
   "route": {
-    "id": "2025-06-21T12:41:48.085622",
-    "total_distance_km": 9.491835311410151,
-    "estimated_duration_minutes": 31.813333333333333,
-    "waypoints": 7,
-    "created_at": "2025-06-21T12:41:48.085639"
+    "id": "2025-06-21T18:11:00.515278",
+    "total_distance_km": 13.446200000000001,
+    "estimated_duration_minutes": 29.678333333333335,
+    "waypoints": 5,
+    "created_at": "2025-06-21T18:11:00.515278"
   },
   "points": [
     {
@@ -15,46 +15,32 @@
       "category": "start"
     },
     {
-      "name": "Nathan Phillips Square",
-      "lat": 43.6532,
-      "lng": -79.3832,
-      "script": "Hey there! Welcome to Nathan Phillips Square, the heart of Toronto! This vibrant space is more than just a pretty park. Did you know that this iconic fountain freezes in the winter, creating an amazing skating rink? Plus, see those concrete arches? They're actually called \"The Arches\" and they're super popular for photos. Take a stroll, soak up the atmosphere, maybe grab a bite from one of the vendors, and definitely take a moment to explore the public art or just people-watch. Enjoy!",
-      "category": "leisure"
-    },
-    {
       "name": "Art Gallery of Ontario",
       "lat": 43.6537,
       "lng": -79.3922,
-      "script": "Hey everyone, welcome to the Art Gallery of Ontario, or the AGO as we locals call it! Get ready to be amazed. This place houses over 90,000 works, from iconic Canadian art like the Group of Seven to masterpieces by European masters and cutting-edge contemporary pieces. Did you know the AGO's spiral staircase was designed by Frank Gehry, the same architect behind the Guggenheim Museum Bilbao? Pretty cool, huh? So, go ahead, get lost in the colours, stories, and perspectives. What will you discover? Observe and Enjoy!",
+      "script": "Hey there! Welcome to the Art Gallery of Ontario, or the AGO as we call it! Get ready to be amazed! We've got everything from iconic Canadian masterpieces by the Group of Seven to cutting-edge contemporary art. Did you know the AGO houses over 95,000 works? One of our highlights is the Thomson Collection, showcasing European masterpieces!\n\nSo, grab a map, take a deep breath, and get ready to lose yourself in art. I encourage you to truly observe each piece, let it speak to you, and uncover the stories they tell. Happy exploring!",
       "category": "tourism"
     },
     {
       "name": "Royal Ontario Museum",
       "lat": 43.6677,
       "lng": -79.3948,
-      "script": "Hey everyone, welcome to the Royal Ontario Museum! Get ready for an adventure through time and culture.\n\nDid you know the ROM houses over 13 million artifacts and artworks? We've got everything from dinosaur skeletons, including \"Gordo\" the Barosaurus, to ancient Egyptian mummies and stunning Chinese art. \n\nWe'll only have a short time, but keep an eye out for the imposing totem poles in the First Peoples gallery, or the dazzling Michael Lee-Chin Crystal itself - a truly unique architectural marvel.\n\nNow, let's dive in! Take your time to explore and observe. There's something amazing around every corner.",
+      "script": "Hey everyone, welcome to the Royal Ontario Museum, or the ROM as we locals call it! Get ready to be amazed. We're talking dinosaurs, ancient Egypt, world cultures, you name it! Fun fact: This building is actually two different architectural styles mashed together, making it quite a unique landmark. I recommend starting with our dinosaur gallery, some of the best fossils in North America are right here. Now, go forth and explore! What wonders will *you* discover today? Take a closer look and see what stories they will tell.",
       "category": "tourism"
     },
     {
       "name": "Casa Loma",
       "lat": 43.678,
       "lng": -79.4095,
-      "script": "Alright, welcome to Casa Loma! Isn't it magnificent? Can you believe this opulent castle was built in the early 1900s? Sir Henry Pellatt, a Canadian financier, dreamed it up, and no detail was spared. Did you know it features secret passages, stables under the main floor, and even an unfinished swimming pool? Now, I encourage you to wander through these grand halls, imagine what life was like, and maybe even uncover a secret or two yourself!",
+      "script": "Welcome to Casa Loma, your very own fairytale castle right here in Toronto! Isn't it magnificent? Can you believe Sir Henry Pellatt built this in the early 1900s, dreaming of a medieval masterpiece? It even boasts secret passages and a stunning view from the towers. Fun fact: It was once used as a set for a movie! Take a moment to imagine what life was like for the Pellatts. Now, go explore the grand halls, the secret tunnels, and enjoy this amazing architectural masterpiece. You never know what secrets you might uncover!",
       "category": "historic"
     },
     {
       "name": "CN Tower",
       "lat": 43.6426,
       "lng": -79.3871,
-      "script": "Hey everyone, welcome to the CN Tower! Get ready for breathtaking views! Did you know we were the tallest freestanding structure in the world for over 30 years? Pretty cool, right? We're going to zoom up in an elevator that travels at a brisk 22 km/h! At the top, you'll find incredible observation decks and even a revolving restaurant. So, take a deep breath, grab your cameras, and get ready to explore Toronto from a whole new perspective. Don't forget to look down... if you dare!",
+      "script": "Hey everyone, welcome to the iconic CN Tower! Get ready for breathtaking views. Did you know \"CN\" originally stood for Canadian National, the railway company that built it? Pretty cool, huh? We're heading up to see Toronto like never before. The glass floor offers an incredible, and slightly terrifying, perspective! Make sure to check out the 360 Restaurant for fine dining with a revolving view. Now, let's get going and explore this architectural marvel! Don't forget to take a moment to observe the city spread out before you. Enjoy!",
       "category": "tourism"
-    },
-    {
-      "name": "CN Tower",
-      "lat": 43.6426,
-      "lng": -79.3871,
-      "script": "Welcome to CN Tower! This is where your journey begins.",
-      "category": "start"
     }
   ],
   "geojson": {
@@ -81,22 +67,6 @@
         "geometry": {
           "type": "Point",
           "coordinates": [
-            -79.3832,
-            43.6532
-          ]
-        },
-        "properties": {
-          "name": "Nathan Phillips Square",
-          "category": "leisure",
-          "script": "Hey there! Welcome to Nathan Phillips Square, the heart of Toronto! This vibrant space is more than just a pretty park. Did you know that this iconic fountain freezes in the winter, creating an amazing skating rink? Plus, see those concrete arches? They're actually called \"The Arches\" and they're super popular for photos. Take a stroll, soak up the atmosphere, maybe grab a bite from one of the vendors, and definitely take a moment to explore the public art or just people-watch. Enjoy!",
-          "order": 1
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
             -79.3922,
             43.6537
           ]
@@ -104,8 +74,8 @@
         "properties": {
           "name": "Art Gallery of Ontario",
           "category": "tourism",
-          "script": "Hey everyone, welcome to the Art Gallery of Ontario, or the AGO as we locals call it! Get ready to be amazed. This place houses over 90,000 works, from iconic Canadian art like the Group of Seven to masterpieces by European masters and cutting-edge contemporary pieces. Did you know the AGO's spiral staircase was designed by Frank Gehry, the same architect behind the Guggenheim Museum Bilbao? Pretty cool, huh? So, go ahead, get lost in the colours, stories, and perspectives. What will you discover? Observe and Enjoy!",
-          "order": 2
+          "script": "Hey there! Welcome to the Art Gallery of Ontario, or the AGO as we call it! Get ready to be amazed! We've got everything from iconic Canadian masterpieces by the Group of Seven to cutting-edge contemporary art. Did you know the AGO houses over 95,000 works? One of our highlights is the Thomson Collection, showcasing European masterpieces!\n\nSo, grab a map, take a deep breath, and get ready to lose yourself in art. I encourage you to truly observe each piece, let it speak to you, and uncover the stories they tell. Happy exploring!",
+          "order": 1
         }
       },
       {
@@ -120,8 +90,8 @@
         "properties": {
           "name": "Royal Ontario Museum",
           "category": "tourism",
-          "script": "Hey everyone, welcome to the Royal Ontario Museum! Get ready for an adventure through time and culture.\n\nDid you know the ROM houses over 13 million artifacts and artworks? We've got everything from dinosaur skeletons, including \"Gordo\" the Barosaurus, to ancient Egyptian mummies and stunning Chinese art. \n\nWe'll only have a short time, but keep an eye out for the imposing totem poles in the First Peoples gallery, or the dazzling Michael Lee-Chin Crystal itself - a truly unique architectural marvel.\n\nNow, let's dive in! Take your time to explore and observe. There's something amazing around every corner.",
-          "order": 3
+          "script": "Hey everyone, welcome to the Royal Ontario Museum, or the ROM as we locals call it! Get ready to be amazed. We're talking dinosaurs, ancient Egypt, world cultures, you name it! Fun fact: This building is actually two different architectural styles mashed together, making it quite a unique landmark. I recommend starting with our dinosaur gallery, some of the best fossils in North America are right here. Now, go forth and explore! What wonders will *you* discover today? Take a closer look and see what stories they will tell.",
+          "order": 2
         }
       },
       {
@@ -136,8 +106,8 @@
         "properties": {
           "name": "Casa Loma",
           "category": "historic",
-          "script": "Alright, welcome to Casa Loma! Isn't it magnificent? Can you believe this opulent castle was built in the early 1900s? Sir Henry Pellatt, a Canadian financier, dreamed it up, and no detail was spared. Did you know it features secret passages, stables under the main floor, and even an unfinished swimming pool? Now, I encourage you to wander through these grand halls, imagine what life was like, and maybe even uncover a secret or two yourself!",
-          "order": 4
+          "script": "Welcome to Casa Loma, your very own fairytale castle right here in Toronto! Isn't it magnificent? Can you believe Sir Henry Pellatt built this in the early 1900s, dreaming of a medieval masterpiece? It even boasts secret passages and a stunning view from the towers. Fun fact: It was once used as a set for a movie! Take a moment to imagine what life was like for the Pellatts. Now, go explore the grand halls, the secret tunnels, and enjoy this amazing architectural masterpiece. You never know what secrets you might uncover!",
+          "order": 3
         }
       },
       {
@@ -152,24 +122,8 @@
         "properties": {
           "name": "CN Tower",
           "category": "tourism",
-          "script": "Hey everyone, welcome to the CN Tower! Get ready for breathtaking views! Did you know we were the tallest freestanding structure in the world for over 30 years? Pretty cool, right? We're going to zoom up in an elevator that travels at a brisk 22 km/h! At the top, you'll find incredible observation decks and even a revolving restaurant. So, take a deep breath, grab your cameras, and get ready to explore Toronto from a whole new perspective. Don't forget to look down... if you dare!",
-          "order": 5
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            -79.3871,
-            43.6426
-          ]
-        },
-        "properties": {
-          "name": "CN Tower",
-          "category": "start",
-          "script": "Welcome to CN Tower! This is where your journey begins.",
-          "order": 6
+          "script": "Hey everyone, welcome to the iconic CN Tower! Get ready for breathtaking views. Did you know \"CN\" originally stood for Canadian National, the railway company that built it? Pretty cool, huh? We're heading up to see Toronto like never before. The glass floor offers an incredible, and slightly terrifying, perspective! Make sure to check out the 360 Restaurant for fine dining with a revolving view. Now, let's get going and explore this architectural marvel! Don't forget to take a moment to observe the city spread out before you. Enjoy!",
+          "order": 4
         }
       },
       {
@@ -182,716 +136,676 @@
               43.641825
             ],
             [
-              -79.386402,
-              43.641829
+              -79.386516,
+              43.641776
             ],
             [
-              -79.386294,
-              43.641877
+              -79.386694,
+              43.641669
             ],
             [
-              -79.386194,
-              43.641919
+              -79.386722,
+              43.64165
             ],
             [
-              -79.38596,
-              43.641996
+              -79.386849,
+              43.641553
             ],
             [
-              -79.385551,
-              43.642089
+              -79.386985,
+              43.641449
             ],
             [
-              -79.385467,
-              43.642107
+              -79.387106,
+              43.641354
             ],
             [
-              -79.385363,
-              43.642129
+              -79.387284,
+              43.641203
             ],
             [
-              -79.385207,
-              43.642162
+              -79.387315,
+              43.641177
             ],
             [
-              -79.384887,
-              43.642218
+              -79.387496,
+              43.641085
             ],
             [
-              -79.384158,
-              43.642356
+              -79.387625,
+              43.640981
             ],
             [
-              -79.384004,
-              43.642387
+              -79.38772,
+              43.640909
             ],
             [
-              -79.383863,
-              43.642418
+              -79.387816,
+              43.640845
             ],
             [
-              -79.383347,
-              43.642527
+              -79.387993,
+              43.640742
             ],
             [
-              -79.38323,
-              43.642552
+              -79.388153,
+              43.640664
             ],
             [
-              -79.382788,
-              43.642646
+              -79.388261,
+              43.640619
             ],
             [
-              -79.382528,
-              43.642702
+              -79.388348,
+              43.640589
             ],
             [
-              -79.382209,
-              43.642771
+              -79.388466,
+              43.640554
             ],
             [
-              -79.381628,
-              43.642897
+              -79.388678,
+              43.640505
             ],
             [
-              -79.381486,
-              43.642925
+              -79.388866,
+              43.640476
             ],
             [
-              -79.381529,
-              43.643025
+              -79.389032,
+              43.640469
             ],
             [
-              -79.38171,
-              43.643495
+              -79.389305,
+              43.640469
             ],
             [
-              -79.381688,
-              43.643631
+              -79.389582,
+              43.640494
             ],
             [
-              -79.382086,
-              43.644602
+              -79.389818,
+              43.640531
             ],
             [
-              -79.382181,
-              43.644651
+              -79.389963,
+              43.640554
             ],
             [
-              -79.382261,
-              43.644829
+              -79.390147,
+              43.640587
             ],
             [
-              -79.382422,
-              43.645183
+              -79.390285,
+              43.640612
             ],
             [
-              -79.382468,
-              43.645235
+              -79.390617,
+              43.640657
             ],
             [
-              -79.382532,
-              43.645289
+              -79.390806,
+              43.640675
             ],
             [
-              -79.382523,
-              43.645447
+              -79.391376,
+              43.640767
             ],
             [
-              -79.382744,
-              43.645972
+              -79.391563,
+              43.640803
             ],
             [
-              -79.382784,
-              43.646066
+              -79.391716,
+              43.640825
             ],
             [
-              -79.382974,
-              43.646543
+              -79.391811,
+              43.640833
             ],
             [
-              -79.383008,
-              43.64662
+              -79.391928,
+              43.640833
             ],
             [
-              -79.383039,
-              43.646692
+              -79.392107,
+              43.640818
             ],
             [
-              -79.38324,
-              43.647171
+              -79.392362,
+              43.640777
             ],
             [
-              -79.383268,
-              43.647238
+              -79.392546,
+              43.640739
             ],
             [
-              -79.383292,
-              43.647298
+              -79.392777,
+              43.640689
             ],
             [
-              -79.383296,
-              43.647308
+              -79.392901,
+              43.640666
             ],
             [
-              -79.383301,
-              43.647319
+              -79.392922,
+              43.640731
             ],
             [
-              -79.383312,
-              43.647346
+              -79.393161,
+              43.641375
             ],
             [
-              -79.383335,
-              43.647401
+              -79.393235,
+              43.641546
             ],
             [
-              -79.383527,
-              43.647866
+              -79.393588,
+              43.642373
             ],
             [
-              -79.383528,
-              43.647871
+              -79.393629,
+              43.642469
             ],
             [
-              -79.38355,
-              43.647926
+              -79.393766,
+              43.642791
             ],
             [
-              -79.383555,
-              43.647938
+              -79.393815,
+              43.642895
             ],
             [
-              -79.383561,
-              43.647953
+              -79.393933,
+              43.64317
             ],
             [
-              -79.383587,
-              43.648013
+              -79.393981,
+              43.64328
             ],
             [
-              -79.38374,
-              43.648393
+              -79.394109,
+              43.643515
             ],
             [
-              -79.383812,
-              43.648562
+              -79.394157,
+              43.643608
             ],
             [
-              -79.383911,
-              43.648798
+              -79.39433,
+              43.644038
             ],
             [
-              -79.384046,
-              43.649124
+              -79.394388,
+              43.644178
             ],
             [
-              -79.384066,
-              43.649174
+              -79.394439,
+              43.644302
             ],
             [
-              -79.384077,
-              43.649201
+              -79.394444,
+              43.644313
             ],
             [
-              -79.384101,
-              43.649257
+              -79.394493,
+              43.644443
             ],
             [
-              -79.384106,
-              43.649268
+              -79.394542,
+              43.644569
             ],
             [
-              -79.384107,
-              43.649271
+              -79.394608,
+              43.644738
             ],
             [
-              -79.384312,
-              43.649759
+              -79.394647,
+              43.644839
             ],
             [
-              -79.384376,
-              43.649911
+              -79.394744,
+              43.645109
             ],
             [
-              -79.384449,
-              43.650094
+              -79.394784,
+              43.645219
             ],
             [
-              -79.384566,
-              43.650376
+              -79.394843,
+              43.645377
             ],
             [
-              -79.384596,
-              43.650444
+              -79.394854,
+              43.645408
             ],
             [
-              -79.384622,
-              43.650506
+              -79.394881,
+              43.645463
             ],
             [
-              -79.384636,
-              43.650542
+              -79.394889,
+              43.645481
             ],
             [
-              -79.384751,
-              43.650818
+              -79.394892,
+              43.645487
             ],
             [
-              -79.384876,
-              43.651124
+              -79.394893,
+              43.645491
             ],
             [
-              -79.384881,
-              43.651133
+              -79.394898,
+              43.645502
             ],
             [
-              -79.384905,
-              43.651194
+              -79.394901,
+              43.645508
             ],
             [
-              -79.38491,
-              43.651208
+              -79.394911,
+              43.645529
             ],
             [
-              -79.384809,
-              43.651229
+              -79.39494,
+              43.645585
             ],
             [
-              -79.38454,
-              43.651285
+              -79.39499,
+              43.64571
             ],
             [
-              -79.384458,
-              43.651303
+              -79.395102,
+              43.645976
             ],
             [
-              -79.38442,
-              43.651311
+              -79.395218,
+              43.646245
             ],
             [
-              -79.384303,
-              43.651336
+              -79.395408,
+              43.646699
             ],
             [
-              -79.383687,
-              43.65147
+              -79.395422,
+              43.64673
             ],
             [
-              -79.382457,
-              43.651737
+              -79.395444,
+              43.646775
             ],
             [
-              -79.382042,
-              43.651825
+              -79.395444,
+              43.646775
             ],
             [
-              -79.381734,
-              43.651889
+              -79.395477,
+              43.646851
             ],
             [
-              -79.381761,
-              43.651899
+              -79.395643,
+              43.647277
             ],
             [
-              -79.381876,
-              43.651941
+              -79.3957,
+              43.647423
             ],
             [
-              -79.382035,
-              43.651986
+              -79.395811,
+              43.647688
             ],
             [
-              -79.382118,
-              43.65201
+              -79.395826,
+              43.647724
             ],
             [
-              -79.382192,
-              43.65204
+              -79.395844,
+              43.647766
             ],
             [
-              -79.382251,
-              43.652086
+              -79.39588,
+              43.64784
             ],
             [
-              -79.382296,
-              43.652147
+              -79.395909,
+              43.647899
             ],
             [
-              -79.382331,
-              43.652207
+              -79.395929,
+              43.64794
             ],
             [
-              -79.382357,
-              43.652279
+              -79.396064,
+              43.648255
             ],
             [
-              -79.382418,
-              43.652434
+              -79.396102,
+              43.648357
             ],
             [
-              -79.38261,
-              43.652915
+              -79.396226,
+              43.648695
             ],
             [
-              -79.382636,
-              43.652981
+              -79.396244,
+              43.648737
             ],
             [
-              -79.382658,
-              43.653037
+              -79.396254,
+              43.648759
             ],
             [
-              -79.382742,
-              43.653248
+              -79.396259,
+              43.648771
             ],
             [
-              -79.38276,
-              43.653292
+              -79.39626,
+              43.648774
             ],
             [
-              -79.382831,
-              43.653471
+              -79.396262,
+              43.648778
             ],
             [
-              -79.382944,
-              43.653779
+              -79.396265,
+              43.648787
             ],
             [
-              -79.383009,
-              43.653943
+              -79.396276,
+              43.648813
             ],
             [
-              -79.383045,
-              43.654031
+              -79.396303,
+              43.648877
             ],
             [
-              -79.383121,
-              43.654223
+              -79.396543,
+              43.649452
             ],
             [
-              -79.383126,
-              43.654237
+              -79.396683,
+              43.649794
             ],
             [
-              -79.383133,
-              43.654255
+              -79.396802,
+              43.650082
             ],
             [
-              -79.383173,
-              43.654349
+              -79.39693,
+              43.650424
             ],
             [
-              -79.38323,
-              43.654487
+              -79.396957,
+              43.650496
             ],
             [
-              -79.383339,
-              43.654765
+              -79.397093,
+              43.650856
             ],
             [
-              -79.38342,
-              43.654972
+              -79.397121,
+              43.650913
             ],
             [
-              -79.383467,
-              43.655084
+              -79.397146,
+              43.650968
             ],
             [
-              -79.383509,
-              43.655182
+              -79.397498,
+              43.651844
             ],
             [
-              -79.383578,
-              43.655347
+              -79.397521,
+              43.651905
             ],
             [
-              -79.383701,
-              43.655644
+              -79.397709,
+              43.652374
             ],
             [
-              -79.383729,
-              43.65572
+              -79.397911,
+              43.652865
             ],
             [
-              -79.383734,
-              43.655734
+              -79.397942,
+              43.652946
             ],
             [
-              -79.38385,
-              43.655709
+              -79.397947,
+              43.65296
             ],
             [
-              -79.383865,
-              43.655706
+              -79.397926,
+              43.652964
             ],
             [
-              -79.385199,
-              43.655421
+              -79.397828,
+              43.652988
             ],
             [
-              -79.385893,
-              43.655272
+              -79.397427,
+              43.653078
             ],
             [
-              -79.386001,
-              43.655248
+              -79.39725,
+              43.653114
             ],
             [
-              -79.386123,
-              43.655222
+              -79.397014,
+              43.653165
             ],
             [
-              -79.387119,
-              43.655011
+              -79.396229,
+              43.653325
             ],
             [
-              -79.387826,
-              43.65486
+              -79.396144,
+              43.653342
             ],
             [
-              -79.3879,
-              43.654847
+              -79.396073,
+              43.653357
             ],
             [
-              -79.387937,
-              43.65484
+              -79.39555,
+              43.653464
             ],
             [
-              -79.387975,
-              43.654835
+              -79.394686,
+              43.65364
             ],
             [
-              -79.388019,
-              43.654832
+              -79.394536,
+              43.653671
             ],
             [
-              -79.38815,
-              43.654826
-            ],
-            [
-              -79.388327,
-              43.654819
-            ],
-            [
-              -79.388341,
-              43.654818
-            ],
-            [
-              -79.388475,
-              43.654813
-            ],
-            [
-              -79.388542,
-              43.654811
-            ],
-            [
-              -79.38861,
-              43.654805
-            ],
-            [
-              -79.388644,
-              43.654802
-            ],
-            [
-              -79.388926,
-              43.654743
-            ],
-            [
-              -79.389203,
-              43.654683
-            ],
-            [
-              -79.389776,
-              43.654561
-            ],
-            [
-              -79.390084,
-              43.654494
-            ],
-            [
-              -79.390129,
-              43.654488
-            ],
-            [
-              -79.390161,
-              43.654483
-            ],
-            [
-              -79.390194,
-              43.654481
-            ],
-            [
-              -79.390228,
-              43.65448
-            ],
-            [
-              -79.390259,
-              43.654481
-            ],
-            [
-              -79.390312,
-              43.654487
-            ],
-            [
-              -79.390358,
-              43.654492
-            ],
-            [
-              -79.390399,
-              43.654495
-            ],
-            [
-              -79.390426,
-              43.654497
-            ],
-            [
-              -79.390472,
-              43.6545
-            ],
-            [
-              -79.390515,
-              43.654499
-            ],
-            [
-              -79.390548,
-              43.654497
-            ],
-            [
-              -79.390593,
-              43.654491
-            ],
-            [
-              -79.391342,
-              43.654327
-            ],
-            [
-              -79.391344,
-              43.654326
-            ],
-            [
-              -79.391382,
-              43.654319
-            ],
-            [
-              -79.391416,
-              43.654313
-            ],
-            [
-              -79.391436,
-              43.65431
-            ],
-            [
-              -79.391456,
-              43.654305
-            ],
-            [
-              -79.391481,
-              43.654301
-            ],
-            [
-              -79.391526,
-              43.654293
-            ],
-            [
-              -79.392366,
-              43.65412
-            ],
-            [
-              -79.393739,
-              43.653836
+              -79.393942,
+              43.653793
             ],
             [
               -79.393832,
               43.653816
             ],
             [
-              -79.393838,
-              43.653832
+              -79.393739,
+              43.653836
             ],
             [
-              -79.393863,
-              43.653894
+              -79.392366,
+              43.65412
             ],
             [
-              -79.394034,
-              43.654323
+              -79.391526,
+              43.654293
             ],
             [
-              -79.394214,
-              43.65476
+              -79.391481,
+              43.654301
             ],
             [
-              -79.394232,
-              43.654802
+              -79.391456,
+              43.654305
             ],
             [
-              -79.394247,
-              43.65484
+              -79.391436,
+              43.65431
             ],
             [
-              -79.394463,
-              43.655349
+              -79.391444,
+              43.654331
             ],
             [
-              -79.394622,
-              43.655724
+              -79.391454,
+              43.654356
             ],
             [
-              -79.394644,
-              43.655774
+              -79.391471,
+              43.654394
             ],
             [
-              -79.394667,
-              43.655826
+              -79.391507,
+              43.654492
             ],
             [
-              -79.395129,
-              43.656972
+              -79.391636,
+              43.654797
             ],
             [
-              -79.395167,
-              43.657059
+              -79.391848,
+              43.655305
             ],
             [
-              -79.395374,
-              43.657579
+              -79.391921,
+              43.655483
             ],
             [
-              -79.395486,
-              43.657847
+              -79.392011,
+              43.655699
             ],
             [
-              -79.395597,
-              43.658101
+              -79.392028,
+              43.65574
             ],
             [
-              -79.395696,
+              -79.392059,
+              43.655809
+            ],
+            [
+              -79.392083,
+              43.655865
+            ],
+            [
+              -79.392256,
+              43.656272
+            ],
+            [
+              -79.392445,
+              43.656691
+            ],
+            [
+              -79.39259,
+              43.657038
+            ],
+            [
+              -79.392669,
+              43.657221
+            ],
+            [
+              -79.39273,
+              43.657364
+            ],
+            [
+              -79.393024,
+              43.658062
+            ],
+            [
+              -79.393041,
+              43.658099
+            ],
+            [
+              -79.393056,
+              43.658132
+            ],
+            [
+              -79.39312,
               43.658287
             ],
             [
-              -79.395736,
-              43.658362
+              -79.393198,
+              43.658467
             ],
             [
-              -79.395765,
-              43.658435
+              -79.393254,
+              43.658601
             ],
             [
-              -79.395826,
-              43.658572
+              -79.393313,
+              43.658738
             ],
             [
-              -79.395838,
-              43.658595
+              -79.393465,
+              43.659111
             ],
             [
-              -79.395897,
-              43.658643
+              -79.393477,
+              43.659137
             ],
             [
-              -79.395969,
-              43.658685
+              -79.393479,
+              43.659141
+            ],
+            [
+              -79.393496,
+              43.659187
+            ],
+            [
+              -79.393501,
+              43.659199
+            ],
+            [
+              -79.393588,
+              43.65918
+            ],
+            [
+              -79.393598,
+              43.659178
+            ],
+            [
+              -79.394072,
+              43.659079
+            ],
+            [
+              -79.394682,
+              43.658944
+            ],
+            [
+              -79.394953,
+              43.658885
+            ],
+            [
+              -79.395282,
+              43.658815
+            ],
+            [
+              -79.39546,
+              43.658778
+            ],
+            [
+              -79.395578,
+              43.658758
+            ],
+            [
+              -79.395687,
+              43.658741
+            ],
+            [
+              -79.395757,
+              43.658732
+            ],
+            [
+              -79.395861,
+              43.658717
             ],
             [
               -79.395989,
@@ -2756,22 +2670,118 @@
             [
               -79.386412,
               43.641825
-            ],
-            [
-              -79.386412,
-              43.641825
             ]
           ]
         },
         "properties": {
           "name": "Walking Route",
-          "distance_km": 13.7776,
-          "duration_minutes": 31.813333333333333
+          "distance_km": 13.5746,
+          "duration_minutes": 29.678333333333335
         }
       }
     ]
   },
-  "total_distance_km": 9.491835311410151,
+  "total_distance_km": 13.446200000000001,
+  "distance_matrix": [
+    [
+      0.0,
+      0.0,
+      5.3566,
+      4.633,
+      2.4794,
+      1.8379
+    ],
+    [
+      0.0,
+      0.0,
+      5.3566,
+      4.633,
+      2.4794,
+      1.8379
+    ],
+    [
+      5.3801000000000005,
+      5.3801000000000005,
+      0.0,
+      2.6561999999999997,
+      3.9468,
+      4.4685
+    ],
+    [
+      3.8743000000000003,
+      3.8743000000000003,
+      3.0624000000000002,
+      0.0,
+      2.2952,
+      2.6763000000000003
+    ],
+    [
+      2.536,
+      2.536,
+      3.8136,
+      2.5243,
+      0.0,
+      1.0042
+    ],
+    [
+      1.7649000000000001,
+      1.7649000000000001,
+      4.616,
+      3.1595999999999997,
+      1.0042,
+      0.0
+    ]
+  ],
+  "duration_matrix": [
+    [
+      0.0,
+      0.0,
+      9.976666666666667,
+      9.795,
+      4.033333333333333,
+      3.8766666666666665
+    ],
+    [
+      0.0,
+      0.0,
+      9.976666666666667,
+      9.795,
+      4.033333333333333,
+      3.8766666666666665
+    ],
+    [
+      10.123333333333333,
+      10.123333333333333,
+      0.0,
+      6.5183333333333335,
+      7.91,
+      8.963333333333333
+    ],
+    [
+      8.876666666666667,
+      8.876666666666667,
+      7.368333333333334,
+      0.0,
+      5.671666666666667,
+      6.446666666666667
+    ],
+    [
+      4.418333333333334,
+      4.418333333333334,
+      7.930000000000001,
+      6.923333333333333,
+      0.0,
+      2.1516666666666664
+    ],
+    [
+      3.8883333333333336,
+      3.8883333333333336,
+      8.798333333333334,
+      7.485,
+      2.205,
+      0.0
+    ]
+  ],
   "success": true,
-  "message": "Generated route with 7 waypoints covering 9.5km"
+  "message": "Generated route with 5 waypoints covering 13.4km"
 }
