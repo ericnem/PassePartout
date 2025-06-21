@@ -10,7 +10,7 @@ class TextParser:
     
     def __init__(self):
         genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-        self.model = genai.GenerativeModel('gemini-pro')
+        self.model = genai.GenerativeModel('gemini-2.0-flash')
     
     def parse_input(self, input_text: str) -> Dict[str, Any]:
         """
