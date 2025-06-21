@@ -1,24 +1,27 @@
 """
 Text parser using Gemini API to extract route parameters
 """
-import google.generativeai as genai
+
 import os
-from typing import Dict, Any
+from typing import Any, Dict
+
+import google.generativeai as genai
+
 
 class TextParser:
     """Parse input text using Gemini API to extract route parameters"""
-    
+
     def __init__(self):
         genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
-    
+        self.model = genai.GenerativeModel("gemini-2.0-flash")
+
     def parse_input(self, input_text: str) -> Dict[str, Any]:
         """
         Parse input text to extract route parameters
-        
+
         Args:
             input_text: User's natural language input
-            
+
         Returns:
             Dictionary with extracted parameters
         """
@@ -33,7 +36,7 @@ class TextParser:
         
         Return only valid JSON, no other text.
         """
-        
+
         try:
             response = self.model.generate_content(prompt)
             # Extract JSON from response
@@ -42,24 +45,32 @@ class TextParser:
                 json_text = json_text[7:]
             if json_text.endswith("```"):
                 json_text = json_text[:-3]
-            
+
             import json
+
             parsed = json.loads(json_text)
-            
+
             # Set defaults for missing fields
             defaults = {
                 "max_distance_km": 5.0,
                 "start_location": "city center",
                 "preferences": ["monuments"],
-                "min_distance_km": 0.5
+                "min_distance_km": 0.5,
             }
-            
+
             for key, default_value in defaults.items():
                 if key not in parsed:
                     parsed[key] = default_value
-            
+
+            # 🌟 Ensure preferences is not empty
+            if not parsed.get("preferences"):
+                print(
+                    "[INFO] Preferences empty from parser, using default ['monuments']"
+                )
+                parsed["preferences"] = ["monuments"]
+
             return parsed
-            
+
         except Exception as e:
             print(f"Error parsing text with Gemini: {e}")
             # Return defaults if parsing fails
@@ -67,5 +78,5 @@ class TextParser:
                 "max_distance_km": 5.0,
                 "start_location": "city center",
                 "preferences": ["monuments"],
-                "min_distance_km": 0.5
-            } 
+                "min_distance_km": 0.5,
+            }
