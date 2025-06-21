@@ -17,59 +17,76 @@ class OSRMClient:
 
     def get_distance_matrix(
         self, points: List[Tuple[float, float]]
-    ) -> List[List[float]]:
+    ) -> Dict[str, List[List[float]]]:
         """
-        Get distance matrix between all points using OSRM
+        Get distance and duration matrices between all points using OSRM
 
         Args:
             points: List of (lat, lng) tuples
 
         Returns:
-            Distance matrix (2D list of distances in km)
+            Dict with 'distance_matrix' (in km) and 'duration_matrix' (in minutes)
         """
         if len(points) < 2:
-            return [[0.0]]
+            return {"distance_matrix": [[0.0]], "duration_matrix": [[0.0]]}
 
         # Build coordinates string for OSRM
         coords = ";".join([f"{lng},{lat}" for lat, lng in points])
 
-        # Use the OSRM table service for distance matrix
-        url = f"https://router.project-osrm.org/table/v1/driving/{coords}"
-        params = {"annotations": "distance"}
+        # Use the OSRM table service for distance and duration matrix (foot profile)
+        url = f"https://router.project-osrm.org/table/v1/foot/{coords}"
+        params = {"annotations": "distance,duration"}
 
         try:
             response = self.session.get(url, params=params)
             response.raise_for_status()
 
             data = response.json()
-            # Remove debug print, just raise if 'distances' is missing
-            if data["code"] != "Ok" or "distances" not in data:
+            if (
+                data["code"] != "Ok"
+                or "distances" not in data
+                or "durations" not in data
+            ):
                 raise Exception(
-                    f"OSRM error: {data.get('message', 'No distances in response')}"
+                    f"OSRM error: {data.get('message', 'No distances or durations in response')}"
                 )
 
-            # Extract distances from response
+            # Extract and convert distances (meters to km) and durations (seconds to minutes)
             distances = data["distances"]
+            durations = data["durations"]
 
-            # Convert to km and create matrix
-            matrix = []
-            for i, row in enumerate(distances):
-                matrix_row = []
-                for j, distance in enumerate(row):
+            distance_matrix = []
+            duration_matrix = []
+            for i, (row_dist, row_dur) in enumerate(zip(distances, durations)):
+                matrix_row_dist = []
+                matrix_row_dur = []
+                for j, (distance, duration) in enumerate(zip(row_dist, row_dur)):
                     if distance is None:
-                        # If no route found, use straight-line distance as fallback
                         distance = self._haversine_distance(points[i], points[j])
                     else:
-                        distance = distance / 1000  # Convert meters to km
-                    matrix_row.append(distance)
-                matrix.append(matrix_row)
+                        distance = distance / 1000  # meters to km
+                    if duration is None:
+                        duration = (
+                            self._haversine_distance(points[i], points[j]) / 5
+                        ) * 60  # assume 5km/h
+                    else:
+                        duration = duration / 60  # seconds to minutes
+                    matrix_row_dist.append(distance)
+                    matrix_row_dur.append(duration)
+                distance_matrix.append(matrix_row_dist)
+                duration_matrix.append(matrix_row_dur)
 
-            return matrix
+            return {
+                "distance_matrix": distance_matrix,
+                "duration_matrix": duration_matrix,
+            }
 
         except Exception as e:
-            print(f"Error getting distance matrix from OSRM: {e}")
-            # Fallback to haversine distances
-            return self._haversine_matrix(points)
+            print(f"Error getting distance/duration matrix from OSRM: {e}")
+            # Fallback to haversine distances and estimated durations
+            dist = self._haversine_matrix(points)
+            dur = [[(d / 5) * 60 for d in row] for row in dist]  # 5km/h walking
+            return {"distance_matrix": dist, "duration_matrix": dur}
 
     def get_route(self, points: List[Tuple[float, float]]) -> Dict[str, Any]:
         """
@@ -87,7 +104,7 @@ class OSRMClient:
         # Build coordinates string for OSRM
         coords = ";".join([f"{lng},{lat}" for lat, lng in points])
 
-        url = f"{self.OSRM_URL}/driving/{coords}"
+        url = f"https://router.project-osrm.org/route/v1/foot/{coords}"
         params = {"overview": "full", "geometries": "geojson"}
 
         try:
