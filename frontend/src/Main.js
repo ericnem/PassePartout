@@ -17,7 +17,7 @@ export default function Component() {
         <div style={{ width: "250px", display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div style={{ border: "1px solid orange", borderRadius: "8px", padding: "1rem" }}>
             <h3>Trip Info</h3>
-            <p>Distance: 16km</p>
+            <p>Distance: 18km</p>
             <p>ETA: 3:54 PM</p>
             <p>Calories: 500 Kcal</p>
           </div>
