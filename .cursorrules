@@ -1,0 +1,106 @@
+.cursorrules
+
+Cursor IDE guidance for EarSightAI hackathon project
+
+[meta]
+project_name = "EarSightAI"
+description  = "A browser‑based, audio‑first tour‑guide web app that narrates interesting, location‑specific facts in real time."
+
+[roles]
+
+The current teammate (you) will own backend development.
+
+primary_responsibility = "backend"
+
+[guidelines]
+
+1. Scope
+
+‑ Generate or modify only backend code (API routes, data caching layers, geospatial logic, LLM/RAG pipelines, etc.).
+
+2. Dependencies
+
+‑ Do NOT introduce or lock in third‑party libraries at this stage.
+
+3. Language & Style
+
+‑ Target Node 20, ECMAScript modules, and strict TypeScript.
+
+‑ Favour functional, modular design with clear type annotations.
+
+4. Documentation
+
+‑ Include concise JSDoc comments and descriptive commit messages.
+
+5. Testing
+
+‑ Stub unit tests where appropriate; leave concrete tooling choice open for later.
+
+[git]
+commit_convention = "Conventional Commits"
+branching_model   = "feat/, fix/, chore/*"
+
+# Scratchpad
+
+## Current Task: MVP Backend Implementation
+
+### MVP Plan Analysis
+The plan involves creating a backend that:
+1. Takes free text input (e.g., "I want a 5 km walk starting at CN Tower visiting famous monuments")
+2. Uses Gemini API to parse input and extract parameters
+3. Queries Overpass API (OpenStreetMap) for POIs
+4. Uses OSRM for walking distances
+5. Uses OR-Tools to solve TSP for optimal route
+6. Generates scripts for each stop
+7. Returns GeoJSON route object
+
+### Tech Stack:
+- Python (FastAPI) — API framework
+- Gemini API — parse input text
+- Overpass API (OpenStreetMap) — get POIs
+- OSRM (public server) — get walking distances
+- OR-Tools — solve TSP for walking route
+- GeoJSON — return route object
+
+### Implementation Plan:
+[X] 1. Set up FastAPI with Gemini integration
+[X] 2. Create text parsing with Gemini API
+[X] 3. Implement Overpass API integration for POIs
+[X] 4. Add OSRM integration for distance calculations
+[X] 5. Implement OR-Tools TSP solver
+[X] 6. Create script generation
+[X] 7. Design GeoJSON response format
+[X] 8. Test complete flow
+
+### API Design:
+- POST /generate-route
+- Request: { "input_text": "..." }
+- Response: { "route": { "points": [...], "geojson": {...}, "total_distance_km": ... } }
+
+### Implementation Status:
+✅ **COMPLETED**: Full MVP backend implementation with:
+- Text parsing using Gemini API
+- POI fetching from OpenStreetMap via Overpass API
+- Distance calculations using OSRM
+- Route optimization using OR-Tools TSP solver
+- Script generation using Gemini API
+- GeoJSON response format for map integration
+- Complete FastAPI application with proper error handling
+
+### Files Created:
+- `main.py` - FastAPI application with route generation endpoint
+- `models.py` - Pydantic models for API requests/responses
+- `text_parser.py` - Gemini API integration for text parsing
+- `overpass_client.py` - OpenStreetMap POI fetching
+- `osrm_client.py` - Walking distance calculations
+- `tsp_solver.py` - OR-Tools TSP optimization
+- `script_generator.py` - Gemini API script generation
+- `test_mvp.py` - Test script for verification
+- `requirements.txt` - All necessary dependencies
+
+### Next Steps:
+[ ] Test the backend with the test script
+[ ] Integrate with frontend
+[ ] Add error handling for API rate limits
+[ ] Optimize performance for production
+[ ] Add caching for POI data
