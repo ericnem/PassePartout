@@ -27,6 +27,9 @@ app = FastAPI(
     title="EarSightAI Backend",
     description="A browser-based, audio-first tour-guide web app",
     version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
 )
 
 # Setup CORS
