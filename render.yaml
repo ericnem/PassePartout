@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: passepartout-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+    rootDir: backend
+
+  - type: static
+    name: passepartout-frontend
+    env: static
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    rootDir: frontend
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        fromService:
+          type: web
+          name: passepartout-backend
+          property: url

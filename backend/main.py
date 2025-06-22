@@ -354,3 +354,7 @@ async def clear_roam_cache():
 def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+
+
+port = int(os.environ.get("PORT", 10000))
+# Use this port in your uvicorn command if you want to be dynamic
