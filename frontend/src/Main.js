@@ -102,7 +102,7 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
     const intervalId = setInterval(async () => {
       console.log("Polling AI service...");
       try {
-        const response = await fetch("http://localhost:8000/roam", {
+        const response = await fetch("https://passepartout-dmx5.onrender.com/roam", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -144,7 +144,7 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
     console.log("Submitting AI request:", inputText);
 
     try {
-      const response = await fetch("http://localhost:8000/generate-route", {
+      const response = await fetch("https://passepartout-dmx5.onrender.com/generate-route", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ input_text: inputText, context: chatHistory })
