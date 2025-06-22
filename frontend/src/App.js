@@ -16,7 +16,7 @@ function App() {
 
   return ( 
     <div>
-      <MainPage currentLocation={currentLocation}/>
+      <MainPage currentLocation={currentLocation} setCurrentLocation={setCurrentLocation}/>
     </div>
   );
 }

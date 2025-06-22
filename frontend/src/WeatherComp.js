@@ -17,7 +17,7 @@ export default function WeatherComponent({ weatherData, weatherLoading, currentL
   if (weatherData) {
     return (
       <div style={{
-        marginTop: '15px',
+        marginTop: '0px',
         padding: '10px',
         background: 'linear-gradient(135deg, #74b9ff, #0984e3)',
         borderRadius: '8px',
