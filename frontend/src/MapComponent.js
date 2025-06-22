@@ -98,7 +98,9 @@ export default function MapComponent({ pathData, currentLocation }) {
           <Marker key={idx} position={[point.lat, point.lng]}>
             <Popup>
               <strong>{point.name}</strong><br />
-              {point.script}
+              {point.script && point.script.length > 200
+                ? point.script.slice(0, 200) + '...'
+                : point.script}
             </Popup>
           </Marker>
         ))}
