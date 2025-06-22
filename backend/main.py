@@ -12,9 +12,10 @@ from fastapi.responses import JSONResponse
 from geojson import Feature, FeatureCollection, LineString, Point
 
 # Import our modules
-from models import RoutePoint, RouteRequest, RouteResponse
+from models import RoamRequest, RoamResponse, RoutePoint, RouteRequest, RouteResponse
 from osrm_client import OSRMClient
 from overpass_client import OverpassClient
+from roam_service import RoamService
 from script_generator import ScriptGenerator
 from text_parser import TextParser
 from tsp_solver import TSPSolver
@@ -43,6 +44,7 @@ overpass_client = OverpassClient()
 osrm_client = OSRMClient()
 tsp_solver = TSPSolver()
 script_generator = ScriptGenerator()
+roam_service = RoamService()
 
 
 @app.get("/")
@@ -50,7 +52,7 @@ def read_root():
     return {
         "message": "EarSightAI Backend running!",
         "version": "1.0.0",
-        "endpoints": {"generate_route": "POST /generate-route"},
+        "endpoints": {"generate_route": "POST /generate-route", "roam": "POST /roam"},
     }
 
 
@@ -279,6 +281,73 @@ def create_geojson(points: list[RoutePoint], route_details: dict) -> dict:
         features.append(route_feature)
 
     return FeatureCollection(features)
+
+
+@app.post("/roam", response_model=RoamResponse)
+async def roam(request: RoamRequest):
+    """
+    Get AI-generated summary of nearby Points of Interest
+
+    Args:
+        request: RoamRequest containing coordinates and optional context
+
+    Returns:
+        RoamResponse with summary
+    """
+    try:
+        # Accept context and pass through
+        print(
+            f"Roam request: coordinates={request.coordinates}, context={request.context}"
+        )
+        # Optionally, validate coordinates string here if needed
+        response = await roam_service.get_roam_with_fallback(request)
+        return response
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error in roam endpoint: {e}")
+        raise HTTPException(
+            status_code=500, detail=f"Error generating roam response: {str(e)}"
+        )
+
+
+@app.get("/roam/cache/stats")
+async def get_roam_cache_stats():
+    """
+    Get cache statistics for the Roam feature
+
+    Returns:
+        Dictionary with cache statistics
+    """
+    try:
+        stats = roam_service.get_cache_stats()
+        return {"cache_stats": stats}
+    except Exception as e:
+        print(f"Error getting cache stats: {e}")
+        raise HTTPException(
+            status_code=500, detail=f"Error getting cache stats: {str(e)}"
+        )
+
+
+@app.delete("/roam/cache")
+async def clear_roam_cache():
+    """
+    Clear all Roam feature cache entries
+
+    Returns:
+        Success message
+    """
+    try:
+        success = await roam_service.clear_cache()
+        if success:
+            return {"message": "Cache cleared successfully"}
+        else:
+            raise HTTPException(status_code=500, detail="Failed to clear cache")
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error clearing cache: {e}")
+        raise HTTPException(status_code=500, detail=f"Error clearing cache: {str(e)}")
 
 
 @app.get("/health")
