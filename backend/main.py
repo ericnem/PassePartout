@@ -35,7 +35,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:5173",
-        "https://your-app.vercel.app"  # <-- Add your actual Vercel domain here after deployment
+        "https://your-app.vercel.app",  # <-- Add your actual Vercel domain here after deployment
     ],
     allow_credentials=True,
     allow_methods=["*"],
