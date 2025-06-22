@@ -42,7 +42,115 @@ branching_model   = "feat/, fix/, chore/*"
 
 # Scratchpad
 
-## Current Task: Roam Component Massive Simplification
+## Current Task: Geocoding Fix for Location Mismatch
+
+### Task Analysis
+The user reported a problem where requests like "give a tour of LA" were defaulting to Toronto coordinates, causing tours to be generated from Toronto to LA instead of within LA itself.
+
+**Problem**: 
+- User asks for tour of "LA" 
+- System defaults to Toronto coordinates (43.6532, -79.3832)
+- Overpass API finds POIs in Toronto area
+- Tour is generated from Toronto to LA locations
+- Results in "Toronto fixation" instead of LA-based tour
+
+### Solution Implemented:
+[X] 1. Added Gemini-based geocoding in overpass_client.py:
+   - New method: `geocode_location_with_gemini(location_name: str)`
+   - Uses Gemini 2.0 Flash to get precise coordinates
+   - Handles common abbreviations (LA → Los Angeles, NYC → New York City)
+   - Returns coordinates with confidence score
+
+[X] 2. Added coordinate validation:
+   - New method: `validate_coordinates_have_pois(lat, lng, radius_km)`
+   - Checks if coordinates actually have POIs in the area
+   - Prevents using coordinates that don't have attractions
+
+[X] 3. Updated geocode_location method with fallback chain:
+   - Method 1: Try Gemini geocoding first
+   - Method 2: Check hardcoded location mappings (added LA, SF, DC, Vegas)
+   - Method 3: Use Nominatim API as fallback
+   - Method 4: Default to Toronto only if all else fails
+
+[X] 4. Enhanced test_mvp.py:
+   - Added geocoding test function
+   - Tests multiple locations including LA, Paris, NYC
+   - Validates POI availability for each location
+   - Updated route generation test to use LA instead of Toronto
+
+[X] 5. Fixed models.py:
+   - Added missing RoutePoint, RouteRequest, RouteResponse models
+   - Ensured compatibility with main.py
+
+### Key Improvements:
+- **Smart Location Resolution**: "LA" → Los Angeles (34.0522, -118.2437)
+- **POI Validation**: Ensures coordinates have actual attractions
+- **Multiple Fallbacks**: Robust geocoding with multiple methods
+- **Better Logging**: Clear debug output for geocoding process
+- **Common Abbreviations**: Handles LA, NYC, SF, DC, Vegas
+
+### Files Modified:
+- `overpass_client.py` - Added Gemini geocoding and validation
+- `test_mvp.py` - Added geocoding tests and LA route test
+- `models.py` - Added missing route models
+
+### ✅ **COMPLETED**: Test Results Show Success!
+**Geocoding Test Results:**
+- ✅ LA → (34.0522, -118.2437) with confidence 0.95
+- ✅ Los Angeles → (34.0522, -118.2437) with confidence 0.95  
+- ✅ Paris → (48.8566, 2.3522) with confidence 0.95
+- ✅ Toronto → (43.6532, -79.3832) with confidence 0.95
+- ✅ New York → (40.7128, -74.006) with confidence 0.95
+- ✅ San Francisco → (37.7749, -122.4194) with confidence 0.95
+
+**Route Generation Test Results:**
+- ✅ "Plan a 3 km walking tour starting at LA and visiting museums"
+- ✅ Successfully geocoded LA to Los Angeles coordinates
+- ✅ Found 10 LA-based museums and cultural sites
+- ✅ Generated 7.71km route with 11 waypoints
+- ✅ All POIs are actually in Los Angeles (not Toronto!)
+
+**LA Museums Found:**
+- LA Plaza De Culturas Y Artes
+- América Tropical Interpretative Center  
+- Italian American Museum of Los Angeles
+- Velveteria: The Museum of Velvet Art
+- Chinese American Museum
+- Gallery at REDCAT
+- The Latino Museum
+- FIDM Museum And Galleries
+- Tamal Museum
+- Grammy Museum
+
+### Problem Solved:
+- ❌ **Before**: "LA tour" → Toronto coordinates → Toronto POIs → Toronto tour
+- ✅ **After**: "LA tour" → Los Angeles coordinates → LA POIs → LA tour
+
+### Next Steps:
+[ ] Integrate with frontend
+[ ] Test in areas with richer OSM data
+[ ] Add caching for POI data
+[ ] Optimize performance for production
+[ ] Add error handling for API rate limits
+
+# Lessons
+
+## User Specified Lessons
+
+- You have a python venv in ./venv. Use it.
+- Include info useful for debugging in the program output.
+- Read the file before you try to edit it.
+- Due to Cursor's limit, when you use `git` and `gh` and need to submit a multiline commit message, first write the message in a file, and then use `git commit -F <filename>` or similar command to commit. And then remove the file. Include "[Cursor] " in the commit message and PR title.
+
+## Cursor learned
+
+- For search results, ensure proper handling of different character encodings (UTF-8) for international queries
+- Add debug information to stderr while keeping the main output clean in stdout for better pipeline integration
+- When using seaborn styles in matplotlib, use 'seaborn-v0_8' instead of 'seaborn' as the style name due to recent seaborn version changes
+- Use 'gpt-4o' as the model name for OpenAI's GPT-4 with vision capabilities
+- **Geocoding Fix**: When users request tours of locations like "LA", use Gemini API for intelligent geocoding instead of hardcoded mappings. This prevents the "Toronto fixation" problem where all tours default to Toronto coordinates. The solution involves: 1) Gemini-based geocoding with confidence scores, 2) POI validation to ensure coordinates have attractions, 3) Multiple fallback methods (hardcoded mappings, Nominatim API), 4) Clear logging for debugging. This approach successfully resolves "LA" → Los Angeles (34.0522, -118.2437) instead of defaulting to Toronto.
+
+## Previous Task: Roam Component Massive Simplification
 
 ### Task Analysis
 The user requested to completely restart and massively simplify the roam component to:
