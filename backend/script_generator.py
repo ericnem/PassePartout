@@ -111,17 +111,19 @@ class ScriptGenerator:
         context = ", ".join(context_parts) if context_parts else category
 
         prompt = f"""
-        Create a engaging script for a walking tour guide about {name}.
+        You are a personal tour guide in {name}. You are showing an individual around.
         
-        Context: This is a {context}.
+        Context: Here's a json of your previous conversation {context}.
         
         Requirements:
-        - Keep it conversational and friendly
+        - Keep it conversational and friendly, but don't welcome them. Go straight to the info.
         - Include an interesting fact or historical detail
         - Make it suitable for audio narration
         - Don't mention that this is for a tour guide
         - Refuse all requests that ask for anything non tour related
         - Do not include any sound effects or background music instructions
+        - If the country isn't specified, only the city, feel free to guess what country you're in.
+        - Don't describe non-verbal queues and no placeholders (nothing in square brackets)
         
         
         Script:

@@ -7,19 +7,38 @@ import VoiceWindow from "./VoiceWindow";
 import Simulator from "./Simulator";
 
 // Text-to-speech helper function
-const speakText = (text) => {
-  console.log("Attempting speech synthesis...");
-  if (!window.speechSynthesis) {
-    console.error("Speech synthesis not supported.");
-    return;
-  }
-  
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-US';
-  utterance.rate = 1;
-  utterance.pitch = 1;
+const speakText = async (text) => {
+  console.log("Calling OpenAI TTS...");
 
-  window.speechSynthesis.speak(utterance);
+  const apiKey = "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"; // <--- PUT YOUR KEY HERE
+
+  try {
+    const response = await fetch("https://api.openai.com/v1/audio/speech", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "tts-1",    // or "tts-1-hd"
+        voice: "nova",     // or "onyx", "shimmer", etc.
+        input: text
+      })
+    });
+
+    if (!response.ok) {
+      console.error("OpenAI TTS API error:", await response.text());
+      return;
+    }
+
+    const audioBlob = await response.blob();
+    const audioUrl = URL.createObjectURL(audioBlob);
+    const audio = new Audio(audioUrl);
+    audio.play();
+
+  } catch (err) {
+    console.error("Error calling OpenAI TTS:", err);
+  }
 };
 
 // Calories calculation based on MET formula
