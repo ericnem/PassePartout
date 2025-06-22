@@ -21,15 +21,9 @@ class TSPSolver:
         Solve TSP to find optimal route (open path, not returning to start)
 
         Args:
-<<<<<<< HEAD
             distance_matrix: Distance matrix between all points (in km)
             max_distance: Maximum allowed route distance (in km)
             
-=======
-            distance_matrix: Distance matrix between all points
-            max_distance: Maximum allowed route distance
-
->>>>>>> 5346f1b7ef48c131ada1a07d647a8d681851c27e
         Returns:
             List of indices representing optimal route order
         """

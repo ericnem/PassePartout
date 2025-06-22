@@ -3,32 +3,42 @@ Simplified Gemini API integration for generating tour summaries
 """
 
 import os
-import google.generativeai as genai
 from typing import Any
+
+import google.generativeai as genai
 
 
 class RoamSummaryGenerator:
     """Generates AI tour summaries using Gemini API"""
-    
+
     def __init__(self):
         api_key = os.getenv("GEMINI_API_KEY")
         if not api_key:
             raise ValueError("GEMINI_API_KEY environment variable is required")
-        
+
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
-    
-    def generate_tour_summary(self, coordinates: str) -> str:
+        self.model = genai.GenerativeModel("gemini-1.5-flash")
+
+    def generate_tour_summary(
+        self, coordinates: str, context: list[dict] = None
+    ) -> str:
         """
         Generate a tour summary for coordinates using Gemini
-        
+
         Args:
             coordinates: Coordinate string (e.g., "43.6426, -79.3871")
-        
+            context: Optional chat history for Gemini
+
         Returns:
             Tour summary string
         """
-        prompt = f"""You are a knowledgeable tour guide. Create an engaging 30-second tour summary for the location at coordinates: {coordinates}
+        context_str = ""
+        if context:
+            for msg in context:
+                role = msg.get("role", "user")
+                content = msg.get("content", "")
+                context_str += f"{role.capitalize()}: {content}\n"
+        prompt = f"""{context_str}You are a knowledgeable tour guide. Create an engaging 30-second tour summary for the location at coordinates: {coordinates}
 
 Include information about:
 - Historical landmarks and facts
@@ -56,4 +66,4 @@ Do NOT mention the coordinates in your response. Keep the summary around 2-3 sen
         except Exception as e:
             print(f"❌ Gemini API error: {e}")
             print(f"❌ Error type: {type(e).__name__}")
-            return "Welcome to this exciting area! This location offers amazing opportunities for visitors. Take a stroll around and discover local attractions, historical landmarks, and hidden gems. Every location has its unique charm and stories waiting to be uncovered!" 
+            return "Welcome to this exciting area! This location offers amazing opportunities for visitors. Take a stroll around and discover local attractions, historical landmarks, and hidden gems. Every location has its unique charm and stories waiting to be uncovered!"

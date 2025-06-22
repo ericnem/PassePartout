@@ -37,7 +37,7 @@ class TextParser:
         {context_str}
         Parse the following text and extract route planning parameters. Return a JSON object with these fields:
         - max_distance_km: maximum route distance in kilometers (default: 5)
-        - start_location: starting point name or coordinates (default: \"city center\")
+        - start_location: starting point name (default: \"city center\")
         - preferences: list of POI types to visit (e.g., [\"monuments\", \"museums\", \"parks\"])
         - min_distance_km: minimum distance between stops (default: 0.5)
         - is_route_request: boolean, true if the text is a request to generate a route, false if it is a general chat or follow-up question
@@ -80,6 +80,7 @@ class TextParser:
                 )
                 parsed["preferences"] = ["monuments"]
 
+            # Only return the extracted parameters, never add 'start' or 'end' fields
             return parsed
 
         except Exception as e:

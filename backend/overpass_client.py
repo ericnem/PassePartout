@@ -3,9 +3,9 @@ Overpass API client to fetch POIs from OpenStreetMap
 """
 
 import time
-from typing import Any, Dict, List
 import os
 import json
+from typing import Any, Dict, List, Optional
 
 import requests
 import google.generativeai as genai
@@ -494,3 +494,48 @@ class OverpassClient:
         except Exception as e:
             print(f"[WARNING] Gemini POI generation failed: {e}")
             return []
+
+    def geocode_locations(self, location_names: List[str]) -> List[Dict[str, float]]:
+        """
+        Geocode a list of location names to coordinates using Nominatim or mappings
+
+        Args:
+            location_names: List of location names
+
+        Returns:
+            List of dictionaries with lat and lng for each location
+        """
+        results = []
+        for name in location_names:
+            coords = self.geocode_location(name)
+            results.append(coords)
+        return results
+
+    def get_supported_categories(self) -> List[str]:
+        """
+        Return a list of supported POI categories
+        """
+        return [
+            "monuments",
+            "museums",
+            "parks",
+            "restaurants",
+            "shopping",
+            "historical",
+            "cultural",
+            "art galleries",
+            "cafes",
+            "bars",
+            "libraries",
+            "churches",
+            "universities",
+            "hotels",
+            "markets",
+            "theatres",
+            "cinemas",
+            "playgrounds",
+            "gyms",
+            "pharmacies",
+            "hospitals",
+            "attractions",
+        ]
