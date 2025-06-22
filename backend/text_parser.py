@@ -15,24 +15,34 @@ class TextParser:
         genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
         self.model = genai.GenerativeModel("gemini-2.0-flash")
 
-    def parse_input(self, input_text: str) -> Dict[str, Any]:
+    def parse_input(self, input_text: str, context: dict = None) -> Dict[str, Any]:
         """
         Parse input text to extract route parameters
 
         Args:
             input_text: User's natural language input
+            context: Optional chat history for Gemini
 
         Returns:
-            Dictionary with extracted parameters
+            Dictionary with extracted parameters, including is_route_request boolean
         """
+        # Format context as chat transcript if provided
+        context_str = ""
+        if context:
+            for msg in context:
+                role = msg.get("role", "user")
+                content = msg.get("content", "")
+                context_str += f"{role.capitalize()}: {content}\n"
         prompt = f"""
+        {context_str}
         Parse the following text and extract route planning parameters. Return a JSON object with these fields:
         - max_distance_km: maximum route distance in kilometers (default: 5)
-        - start_location: starting point name or coordinates (default: "city center")
-        - preferences: list of POI types to visit (e.g., ["monuments", "museums", "parks"])
+        - start_location: starting point name or coordinates (default: \"city center\")
+        - preferences: list of POI types to visit (e.g., [\"monuments\", \"museums\", \"parks\"])
         - min_distance_km: minimum distance between stops (default: 0.5)
+        - is_route_request: boolean, true if the text is a request to generate a route, false if it is a general chat or follow-up question
         
-        Input text: "{input_text}"
+        Input text: \"{input_text}\"
         
         Return only valid JSON, no other text.
         """
@@ -56,6 +66,7 @@ class TextParser:
                 "start_location": "city center",
                 "preferences": ["monuments"],
                 "min_distance_km": 0.5,
+                "is_route_request": True,
             }
 
             for key, default_value in defaults.items():
@@ -79,4 +90,5 @@ class TextParser:
                 "start_location": "city center",
                 "preferences": ["monuments"],
                 "min_distance_km": 0.5,
+                "is_route_request": False,
             }

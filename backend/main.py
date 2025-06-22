@@ -8,6 +8,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from geojson import Feature, FeatureCollection, LineString, Point
 
 # Import our modules
@@ -53,24 +54,49 @@ def read_root():
     }
 
 
-@app.post("/generate-route", response_model=RouteResponse)
+@app.post("/generate-route")
 async def generate_route(request: RouteRequest):
     """
-    Generate an optimized route based on text input
+    Generate an optimized route based on text input or operate as a chatbot if not a route request
 
     Args:
-        request: RouteRequest containing input_text
+        request: RouteRequest containing input_text and optional context
 
     Returns:
         RouteResponse with optimized route, points, and GeoJSON
     """
     try:
         print(f"Processing request: {request.input_text}")
+        context = request.context
 
         # Step 1: Parse input text with Gemini
         print("Step 1: Parsing input text...")
-        params = text_parser.parse_input(request.input_text)
+        params = text_parser.parse_input(request.input_text, context=context)
         print(f"Parsed parameters: {params}")
+
+        if not params.get("is_route_request", True):
+            # Not a route request, operate as chatbot
+            print("Input is not a route request. Acting as chatbot.")
+            # Format context as chat transcript if provided
+            context_str = ""
+            if context:
+                for msg in context:
+                    role = msg.get("role", "user")
+                    content = msg.get("content", "")
+                    context_str += f"{role.capitalize()}: {content}\n"
+            chat_prompt = f"{context_str}User: {request.input_text}\nAssistant:"
+            from script_generator import ScriptGenerator
+
+            script_gen = ScriptGenerator()
+            chat_response = script_gen.model.generate_content(chat_prompt)
+            return JSONResponse(
+                content={
+                    "is_route_response": False,
+                    "chat_response": chat_response.text.strip(),
+                    "success": True,
+                    "message": "Chat response generated.",
+                }
+            )
 
         # Step 2: Geocode starting location
         print("Step 2: Geocoding starting location...")
@@ -79,9 +105,7 @@ async def generate_route(request: RouteRequest):
 
         # Step 3: Get POIs from Overpass API
         print("Step 3: Fetching POIs...")
-        search_radius = min(
-            params["max_distance_km"] * 2, 10
-        )  # Search radius up to 10km
+        search_radius = min(params["max_distance_km"], 10)  # Search radius up to 10km
         pois = overpass_client.get_pois(
             start_coords["lat"],
             start_coords["lng"],
@@ -141,7 +165,7 @@ async def generate_route(request: RouteRequest):
                 # Only generate AI script for the first 3 POIs to avoid rate limits
                 if i <= 3:
                     try:
-                        script = script_generator.generate_script(poi)
+                        script = script_generator.generate_script(poi, context=context)
                     except Exception as e:
                         print(f"Using fallback script for {poi['name']}: {e}")
                         script = f"Welcome to {poi['name']}! This is a great spot to explore and discover what makes Toronto special."
@@ -183,23 +207,26 @@ async def generate_route(request: RouteRequest):
 
         print(f"Route generation complete! Total distance: {total_distance:.2f}km")
 
-        return RouteResponse(
-            route={
-                "id": datetime.now().isoformat(),
+        return JSONResponse(
+            content={
+                "is_route_response": True,
+                "route": {
+                    "id": datetime.now().isoformat(),
+                    "total_distance_km": total_distance,
+                    "estimated_duration_minutes": route_details.get(
+                        "duration", total_distance * 12
+                    ),
+                    "waypoints": len(route_points),
+                    "created_at": datetime.now().isoformat(),
+                },
+                "points": [point.dict() for point in route_points],
+                "geojson": geojson,
                 "total_distance_km": total_distance,
-                "estimated_duration_minutes": route_details.get(
-                    "duration", total_distance * 12
-                ),
-                "waypoints": len(route_points),
-                "created_at": datetime.now().isoformat(),
-            },
-            points=route_points,
-            geojson=geojson,
-            total_distance_km=total_distance,
-            distance_matrix=distance_matrix,
-            duration_matrix=duration_matrix,
-            success=True,
-            message=f"Generated route with {len(route_points)} waypoints covering {total_distance:.1f}km",
+                "distance_matrix": distance_matrix,
+                "duration_matrix": duration_matrix,
+                "success": True,
+                "message": f"Generated route with {len(route_points)} waypoints covering {total_distance:.1f}km",
+            }
         )
 
     except Exception as e:
