@@ -8,6 +8,33 @@ import os
 
 from fastapi.testclient import TestClient
 from main import app
+from overpass_client import OverpassClient
+
+
+def test_geocoding():
+    """Test the new geocoding functionality"""
+    print("🔍 Testing geocoding functionality...")
+    
+    overpass_client = OverpassClient()
+    
+    # Test locations
+    test_locations = [
+        "LA",
+        "Los Angeles", 
+        "Paris",
+        "Toronto",
+        "New York",
+        "San Francisco"
+    ]
+    
+    for location in test_locations:
+        print(f"\n📍 Testing geocoding for: '{location}'")
+        coords = overpass_client.geocode_location(location)
+        print(f"   Result: {coords}")
+        
+        # Test if coordinates have POIs
+        has_pois = overpass_client.validate_coordinates_have_pois(coords["lat"], coords["lng"])
+        print(f"   Has POIs: {has_pois}")
 
 
 def test_mvp_backend():
@@ -23,15 +50,15 @@ def test_mvp_backend():
     else:
         print("❌ Health check failed")
 
-    # Test 2: Route generation
-    print("\n🔍 Testing route generation...")
+    # Test 2: Route generation with LA
+    print("\n🔍 Testing route generation with LA...")
     test_request = {
-        "input_text": "Plan a 5 km walking tour starting at the CN Tower and visiting art galleries.",
+        "input_text": "Plan a 3 km walking tour starting at LA and visiting museums.",
         "context": [
-            {"role": "user", "content": "I want to see some art in Toronto."},
+            {"role": "user", "content": "I want to see some museums in LA."},
             {
                 "role": "assistant",
-                "content": "Sure! Toronto has many great art galleries. Would you like a walking tour?",
+                "content": "Sure! LA has many great museums. Would you like a walking tour?",
             },
         ],
     }
@@ -82,4 +109,8 @@ if __name__ == "__main__":
         print("⚠️ Warning: GEMINI_API_KEY not set. Some features may not work.")
         print("Set it with: export GEMINI_API_KEY='your_key_here'")
 
+    # Test geocoding first
+    test_geocoding()
+    
+    # Then test the full backend
     test_mvp_backend()
