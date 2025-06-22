@@ -27,14 +27,14 @@ class RoutePoint(BaseModel):
     address: Optional[str] = None
     category: Optional[str] = None
     tags: Optional[Dict[str, str]] = None
+    script: Optional[str] = None  # Add script for AI-generated or fallback descriptions
+    distance_from_prev: Optional[float] = None
+    duration_from_prev: Optional[float] = None
 
 
 class RouteRequest(BaseModel):
-    start: RoutePoint
-    end: RoutePoint
-    waypoints: Optional[List[RoutePoint]] = None
-    categories: Optional[List[str]] = None
-    context: Optional[List[Dict]] = None
+    input_text: str
+    context: Optional[List[dict]] = None
 
 
 class RouteResponse(BaseModel):
