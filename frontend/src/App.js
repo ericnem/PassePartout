@@ -1,41 +1,38 @@
-import React, { useState } from 'react';
-import { generateNarration } from './api';
+import React, { useState, useEffect } from 'react';
+import MainPage from "./Main"; // Import the MainPage component
 
 function App() {
-  const [poi, setPoi] = useState('');
-  const [narration, setNarration] = useState('');
-  const [loading, setLoading] = useState(false);
+  // State to hold the user's current location as [latitude, longitude]
+  const [currentLocation, setCurrentLocation] = useState(null);
 
-  const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      const result = await generateNarration(poi);
-      setNarration(result);
-    } catch (error) {
-      console.error(error);
-      setNarration("Error generating narration.");
+  // Runs once when the component mounts to get user's geolocation
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const coords = [
+            position.coords.latitude, 
+            position.coords.longitude
+          ];
+          console.log("Got location:", coords); // Debug log
+          setCurrentLocation(coords);
+        },
+        (error) => {
+          console.error("Error retrieving location:", error);
+        }
+      );
+    } else {
+      console.warn("Geolocation not available in this browser.");
     }
-    setLoading(false);
-  };
+  }, []);
 
-  return (
-    <div style={{ padding: '2rem' }}>
-      <h1>AI Tour Guide</h1>
-      <input
-        type="text"
-        placeholder="Enter Point of Interest"
-        value={poi}
-        onChange={(e) => setPoi(e.target.value)}
-        style={{ width: '300px', marginRight: '1rem' }}
+  return ( 
+    <div>
+      {/* Pass currentLocation and setter to MainPage */}
+      <MainPage 
+        currentLocation={currentLocation} 
+        setCurrentLocation={setCurrentLocation}
       />
-      <button onClick={handleSubmit} disabled={loading}>
-        {loading ? 'Generating...' : 'Generate Narration'}
-      </button>
-
-      <div style={{ marginTop: '2rem' }}>
-        <h2>Narration:</h2>
-        <p>{narration}</p>
-      </div>
     </div>
   );
 }
