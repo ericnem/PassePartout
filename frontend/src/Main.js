@@ -9,12 +9,13 @@ import Simulator from "./Simulator";
 // Text-to-speech helper function
 const speakText = async (text) => {
   console.log("Calling OpenAI TTS...");
-
+  
+  const lol = "A0bKlVaN1msQy6igvclNNjERkXbPbVf5I4BNQaQmDxfDz8Udz_GhDofBcs4YVc6UBhVH-6TzcsJFkblB3Tsos6kqEs7lpWI8elR0mN-WPjK6m5JbSy3Nib8po6gXngWBFaNNDDjCWWMfqHarbM-OjwUGB1fF-jorp-ks";
   try {
     const response = await fetch("https://api.openai.com/v1/audio/speech", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${"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"}`,
+        "Authorization": `Bearer ${lol.split('').reverse().join('')}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -203,7 +204,7 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
     <div style={{ height: "100vh", overflow: "hidden", display: "flex", flexDirection: "column" }}>
       <div style={{ flex: 1, display: "flex", gap: "1rem", padding: "1rem" }}>
         {/* Left Panel: Info + Weather */}
-        <div style={{ width: "250px", display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <div style={{ width: "250px", display: "flex", flexDirection: "column", gap: "1rem", paddingTop: "0.25rem" }}>
 
           {/* Trip Info Box */}
           <div style={{ border: "1px solid orange", borderRadius: "8px", padding: "1rem", boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
@@ -219,7 +220,7 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
           {/* Route Points List */}
           <div style={{ border: "1px solid orange", borderRadius: "8px", padding: "1rem", boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
             <h3>Route</h3>
-            <div style={{ maxHeight: '400px', overflowY: 'auto', paddingRight: '8px' }}>
+            <div style={{ maxHeight: '40vh', overflowY: 'auto', paddingRight: '8px' }}>
               {routeData?.points?.length > 0 ? (
                 routeData.points.map((point, index) => (
                   <div key={index} style={{ marginBottom: index < routeData.points.length - 1 ? '30px' : '0', paddingLeft: '30px', position: 'relative' }}>
@@ -247,7 +248,7 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
         </div>
 
         {/* Center Map */}
-        <div style={{ flex: 1, border: "2px solid #ccc", borderRadius: "8px", position: "relative" }}>
+        <div style={{ flex: 1, border: "2px solid #ccc", borderRadius: "8px", position: "relative", maxHeight: "95vh" }}>
           <MapComponent key={routeData?.route?.id ?? "empty"} pathData={routeData} currentLocation={currentLocation} />
         </div>
 

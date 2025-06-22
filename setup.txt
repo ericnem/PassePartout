@@ -1,6 +1,11 @@
+In terminal 1:
 python3 -m venv venv
 source venv/bin/activate
-pip install fastapi uvicorn pymongo python-dotenv google-generativeai geogjson ortools
-npm install
+cd backend
+pip install fastapi uvicorn pymongo python-dotenv google-generativeai geojson ortools
+uvicorn main:app --reload
+
+In terminal 2:
 cd frontend
+npm install
 npm start
