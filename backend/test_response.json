@@ -1,10 +1,10 @@
 {
   "route": {
-    "id": "2025-06-21T18:11:00.515278",
-    "total_distance_km": 13.446200000000001,
-    "estimated_duration_minutes": 29.678333333333335,
-    "waypoints": 5,
-    "created_at": "2025-06-21T18:11:00.515278"
+    "id": "2025-06-21T19:57:47.270278",
+    "total_distance_km": 27.9125,
+    "estimated_duration_minutes": 55.03333333333333,
+    "waypoints": 11,
+    "created_at": "2025-06-21T19:57:47.270278"
   },
   "points": [
     {
@@ -17,32 +17,94 @@
       "duration_from_prev": null
     },
     {
-      "name": "Art Gallery of Ontario",
-      "lat": 43.6537,
-      "lng": -79.3922,
-      "script": "Hey there! Welcome to the Art Gallery of Ontario, or the AGO as we call it! Get ready to be amazed! We've got everything from iconic Canadian masterpieces by the Group of Seven to cutting-edge contemporary art. Did you know the AGO houses over 95,000 works? One of our highlights is the Thomson Collection, showcasing European masterpieces!\n\nSo, grab a map, take a deep breath, and get ready to lose yourself in art. I encourage you to truly observe each piece, let it speak to you, and uncover the stories they tell. Happy exploring!",
-      "category": "tourism"
+      "name": "CN Tower Edge Walk",
+      "lat": 43.6425012,
+      "lng": -79.3871153,
+      "script": "Ready to take your Toronto experience to the absolute edge? Literally! The CN Tower's EdgeWalk is the world's highest full circle hands-free walk, and back in the 70s, workers building this incredible tower were nicknamed \"ironworkers\" because they were fearless in the face of heights. Who knows, maybe you'll earn that name today!",
+      "category": "tourism",
+      "distance_from_prev": 0.006900000000000001,
+      "duration_from_prev": 0.011666666666666665
     },
     {
-      "name": "Royal Ontario Museum",
-      "lat": 43.6677,
-      "lng": -79.3948,
-      "script": "Hey everyone, welcome to the Royal Ontario Museum, or the ROM as we locals call it! Get ready to be amazed. We're talking dinosaurs, ancient Egypt, world cultures, you name it! Fun fact: This building is actually two different architectural styles mashed together, making it quite a unique landmark. I recommend starting with our dinosaur gallery, some of the best fossils in North America are right here. Now, go forth and explore! What wonders will *you* discover today? Take a closer look and see what stories they will tell.",
-      "category": "tourism"
+      "name": "Rees Wave Deck",
+      "lat": 43.6384874,
+      "lng": -79.3873013,
+      "script": "Hey everyone, check out the Rees Wave Deck! This unique undulating structure isn't just for show; it actually sits on the original concrete foundations of a former sugar refinery that was a major part of Toronto's industrial past. Pretty cool, right?",
+      "category": "tourism",
+      "distance_from_prev": 0.45139999999999997,
+      "duration_from_prev": 1.2683333333333333
     },
     {
-      "name": "Casa Loma",
-      "lat": 43.678,
-      "lng": -79.4095,
-      "script": "Welcome to Casa Loma, your very own fairytale castle right here in Toronto! Isn't it magnificent? Can you believe Sir Henry Pellatt built this in the early 1900s, dreaming of a medieval masterpiece? It even boasts secret passages and a stunning view from the towers. Fun fact: It was once used as a set for a movie! Take a moment to imagine what life was like for the Pellatts. Now, go explore the grand halls, the secret tunnels, and enjoy this amazing architectural masterpiece. You never know what secrets you might uncover!",
-      "category": "historic"
+      "name": "Empire Sandy",
+      "lat": 43.6368209,
+      "lng": -79.3916668,
+      "script": "Ahoy there, folks! We're passing the majestic Empire Sandy, a replica of a 19th-century coastal schooner. Fun fact: she was originally built as a Great Lakes sand dredger, before being lovingly transformed into the beauty she is today!",
+      "category": "tourism",
+      "distance_from_prev": 0.3897,
+      "duration_from_prev": 0.9016666666666667
     },
     {
-      "name": "CN Tower",
-      "lat": 43.6426,
-      "lng": -79.3871,
-      "script": "Hey everyone, welcome to the iconic CN Tower! Get ready for breathtaking views. Did you know \"CN\" originally stood for Canadian National, the railway company that built it? Pretty cool, huh? We're heading up to see Toronto like never before. The glass floor offers an incredible, and slightly terrifying, perspective! Make sure to check out the 360 Restaurant for fine dining with a revolving view. Now, let's get going and explore this architectural marvel! Don't forget to take a moment to observe the city spread out before you. Enjoy!",
-      "category": "tourism"
+      "name": "Kajama",
+      "lat": 43.6377486,
+      "lng": -79.3819874,
+      "script": "Here's Kajama, another interesting location on your walking tour of Toronto.",
+      "category": "tourism",
+      "distance_from_prev": 1.5235999999999998,
+      "duration_from_prev": 4.221666666666667
+    },
+    {
+      "name": "Mackenzie House",
+      "lat": 43.6557497,
+      "lng": -79.3782498,
+      "script": "Here's Mackenzie House, another interesting location on your walking tour of Toronto.",
+      "category": "tourism",
+      "distance_from_prev": 2.5361,
+      "duration_from_prev": 6.163333333333333
+    },
+    {
+      "name": "Distillery District",
+      "lat": 43.6502803,
+      "lng": -79.3595767,
+      "script": "Here's Distillery District, another interesting location on your walking tour of Toronto.",
+      "category": "tourism",
+      "distance_from_prev": 2.2986,
+      "duration_from_prev": 5.1899999999999995
+    },
+    {
+      "name": "Unnamed Location",
+      "lat": 43.6535879,
+      "lng": -79.3536813,
+      "script": "Here's Unnamed Location, another interesting location on your walking tour of Toronto.",
+      "category": "tourism",
+      "distance_from_prev": 1.1275,
+      "duration_from_prev": 2.6566666666666667
+    },
+    {
+      "name": "Don Valley Brick Works",
+      "lat": 43.6845606,
+      "lng": -79.3654443,
+      "script": "Here's Don Valley Brick Works, another interesting location on your walking tour of Toronto.",
+      "category": "tourism",
+      "distance_from_prev": 4.1846000000000005,
+      "duration_from_prev": 7.485
+    },
+    {
+      "name": "No. 8 Hose Station",
+      "lat": 43.6568984,
+      "lng": -79.404719,
+      "script": "Here's No. 8 Hose Station, another interesting location on your walking tour of Toronto.",
+      "category": "tourism",
+      "distance_from_prev": 6.9065,
+      "duration_from_prev": 13.013333333333332
+    },
+    {
+      "name": "Colborne Lodge",
+      "lat": 43.6403622,
+      "lng": -79.459996,
+      "script": "Here's Colborne Lodge, another interesting location on your walking tour of Toronto.",
+      "category": "tourism",
+      "distance_from_prev": 8.4876,
+      "duration_from_prev": 11.646666666666667
     }
   ],
   "geojson": {
@@ -76,7 +138,7 @@
         "properties": {
           "name": "CN Tower Edge Walk",
           "category": "tourism",
-          "script": "Hey there! Welcome to the Art Gallery of Ontario, or the AGO as we call it! Get ready to be amazed! We've got everything from iconic Canadian masterpieces by the Group of Seven to cutting-edge contemporary art. Did you know the AGO houses over 95,000 works? One of our highlights is the Thomson Collection, showcasing European masterpieces!\n\nSo, grab a map, take a deep breath, and get ready to lose yourself in art. I encourage you to truly observe each piece, let it speak to you, and uncover the stories they tell. Happy exploring!",
+          "script": "Ready to take your Toronto experience to the absolute edge? Literally! The CN Tower's EdgeWalk is the world's highest full circle hands-free walk, and back in the 70s, workers building this incredible tower were nicknamed \"ironworkers\" because they were fearless in the face of heights. Who knows, maybe you'll earn that name today!",
           "order": 1
         }
       },
@@ -92,7 +154,7 @@
         "properties": {
           "name": "Rees Wave Deck",
           "category": "tourism",
-          "script": "Hey everyone, welcome to the Royal Ontario Museum, or the ROM as we locals call it! Get ready to be amazed. We're talking dinosaurs, ancient Egypt, world cultures, you name it! Fun fact: This building is actually two different architectural styles mashed together, making it quite a unique landmark. I recommend starting with our dinosaur gallery, some of the best fossils in North America are right here. Now, go forth and explore! What wonders will *you* discover today? Take a closer look and see what stories they will tell.",
+          "script": "Hey everyone, check out the Rees Wave Deck! This unique undulating structure isn't just for show; it actually sits on the original concrete foundations of a former sugar refinery that was a major part of Toronto's industrial past. Pretty cool, right?",
           "order": 2
         }
       },
@@ -106,9 +168,9 @@
           ]
         },
         "properties": {
-          "name": "Casa Loma",
-          "category": "historic",
-          "script": "Welcome to Casa Loma, your very own fairytale castle right here in Toronto! Isn't it magnificent? Can you believe Sir Henry Pellatt built this in the early 1900s, dreaming of a medieval masterpiece? It even boasts secret passages and a stunning view from the towers. Fun fact: It was once used as a set for a movie! Take a moment to imagine what life was like for the Pellatts. Now, go explore the grand halls, the secret tunnels, and enjoy this amazing architectural masterpiece. You never know what secrets you might uncover!",
+          "name": "Empire Sandy",
+          "category": "tourism",
+          "script": "Ahoy there, folks! We're passing the majestic Empire Sandy, a replica of a 19th-century coastal schooner. Fun fact: she was originally built as a Great Lakes sand dredger, before being lovingly transformed into the beauty she is today!",
           "order": 3
         }
       },
@@ -124,7 +186,7 @@
         "properties": {
           "name": "Kajama",
           "category": "tourism",
-          "script": "Hey everyone, welcome to the iconic CN Tower! Get ready for breathtaking views. Did you know \"CN\" originally stood for Canadian National, the railway company that built it? Pretty cool, huh? We're heading up to see Toronto like never before. The glass floor offers an incredible, and slightly terrifying, perspective! Make sure to check out the 360 Restaurant for fine dining with a revolving view. Now, let's get going and explore this architectural marvel! Don't forget to take a moment to observe the city spread out before you. Enjoy!",
+          "script": "Here's Kajama, another interesting location on your walking tour of Toronto.",
           "order": 4
         }
       },
@@ -4852,6 +4914,296 @@
     ]
   },
   "total_distance_km": 27.9125,
+  "distance_matrix": [
+    [
+      0.0,
+      7.4252,
+      9.456299999999999,
+      0.006900000000000001,
+      0.4583,
+      2.9011,
+      3.0103,
+      2.3655,
+      0.6707000000000001,
+      0.9478,
+      3.2273
+    ],
+    [
+      6.9383,
+      0.0,
+      15.7,
+      6.9314,
+      7.3486,
+      9.728,
+      8.781600000000001,
+      9.1905,
+      7.098,
+      6.7192,
+      10.0541
+    ],
+    [
+      9.1104,
+      15.4346,
+      0.0,
+      9.117299999999998,
+      9.2672,
+      4.6529,
+      6.9065,
+      4.9978,
+      9.1083,
+      10.2934,
+      3.9865999999999997
+    ],
+    [
+      0.006900000000000001,
+      7.4321,
+      9.449399999999999,
+      0.0,
+      0.45139999999999997,
+      2.908,
+      3.0033000000000003,
+      2.3724000000000003,
+      0.6777000000000001,
+      0.9409,
+      3.2342
+    ],
+    [
+      0.44880000000000003,
+      6.8049,
+      9.2826,
+      0.44189999999999996,
+      0.0,
+      3.3105,
+      3.1268000000000002,
+      2.764,
+      1.1339000000000001,
+      0.3897,
+      3.6367
+    ],
+    [
+      2.7785,
+      9.110299999999999,
+      4.939,
+      2.7854,
+      2.9353000000000002,
+      0.0,
+      5.821899999999999,
+      2.267,
+      2.7764,
+      3.9691,
+      1.1275
+    ],
+    [
+      3.0348,
+      8.4876,
+      6.9413,
+      3.0279000000000003,
+      3.1275999999999997,
+      5.3387,
+      0.0,
+      2.6835,
+      3.7056,
+      2.7471,
+      5.664899999999999
+    ],
+    [
+      2.5245,
+      8.8526,
+      5.003,
+      2.5315,
+      2.6814,
+      2.2986,
+      2.6844,
+      0.0,
+      2.5225,
+      3.4816,
+      2.5787
+    ],
+    [
+      0.6707000000000001,
+      7.408399999999999,
+      9.1244,
+      0.6777000000000001,
+      0.5278999999999999,
+      3.1223,
+      3.5579,
+      2.5361,
+      0.0,
+      0.9175,
+      3.4485
+    ],
+    [
+      0.8385,
+      6.2377,
+      9.6722,
+      0.8315,
+      0.3897,
+      3.7001999999999997,
+      3.5636,
+      3.1536,
+      1.5235999999999998,
+      0.0,
+      4.0264
+    ],
+    [
+      3.4856,
+      9.8175,
+      4.1846000000000005,
+      3.4926,
+      3.6425,
+      0.7664,
+      6.529,
+      2.6687,
+      3.4836,
+      4.6763,
+      0.0
+    ]
+  ],
+  "duration_matrix": [
+    [
+      0.0,
+      8.808333333333334,
+      11.178333333333335,
+      0.011666666666666665,
+      1.28,
+      5.781666666666666,
+      5.3116666666666665,
+      5.288333333333333,
+      2.353333333333333,
+      2.125,
+      6.086666666666667
+    ],
+    [
+      9.275,
+      0.0,
+      17.883333333333333,
+      9.263333333333332,
+      9.473333333333333,
+      12.665,
+      12.193333333333333,
+      13.129999999999999,
+      9.526666666666667,
+      9.128333333333334,
+      12.97
+    ],
+    [
+      11.811666666666667,
+      17.495,
+      0.0,
+      11.823333333333332,
+      12.306666666666667,
+      8.153333333333332,
+      13.013333333333332,
+      8.881666666666666,
+      12.823333333333332,
+      12.091666666666667,
+      6.463333333333334
+    ],
+    [
+      0.011666666666666665,
+      8.82,
+      11.166666666666666,
+      0.0,
+      1.2683333333333333,
+      5.793333333333334,
+      5.3,
+      5.3,
+      2.365,
+      2.1133333333333333,
+      6.098333333333333
+    ],
+    [
+      1.25,
+      9.196666666666665,
+      10.741666666666667,
+      1.2383333333333333,
+      0.0,
+      5.5233333333333325,
+      5.506666666666666,
+      5.8966666666666665,
+      3.32,
+      0.9016666666666667,
+      5.828333333333333
+    ],
+    [
+      5.113333333333333,
+      11.153333333333334,
+      8.798333333333334,
+      5.125,
+      5.608333333333333,
+      0.0,
+      8.943333333333333,
+      4.965,
+      6.125,
+      5.75,
+      2.6566666666666667
+    ],
+    [
+      5.516666666666667,
+      11.646666666666667,
+      13.2,
+      5.505,
+      5.828333333333333,
+      9.918333333333333,
+      0.0,
+      5.653333333333333,
+      7.87,
+      4.891666666666667,
+      10.223333333333333
+    ],
+    [
+      5.335,
+      12.088333333333333,
+      9.096666666666666,
+      5.346666666666667,
+      5.83,
+      5.1899999999999995,
+      5.71,
+      0.0,
+      6.346666666666667,
+      6.496666666666667,
+      5.493333333333334
+    ],
+    [
+      2.408333333333333,
+      9.841666666666667,
+      11.988333333333333,
+      2.42,
+      1.9733333333333334,
+      6.493333333333334,
+      7.428333333333333,
+      6.163333333333333,
+      0.0,
+      2.875,
+      6.798333333333333
+    ],
+    [
+      2.1516666666666664,
+      9.426666666666668,
+      11.643333333333334,
+      2.14,
+      0.9016666666666667,
+      6.425,
+      6.988333333333333,
+      6.798333333333333,
+      4.221666666666667,
+      0.0,
+      6.73
+    ],
+    [
+      6.033333333333333,
+      12.073333333333332,
+      7.485,
+      6.045,
+      6.528333333333333,
+      1.9966666666666666,
+      9.863333333333333,
+      5.52,
+      7.045,
+      6.67,
+      0.0
+    ]
+  ],
   "success": true,
   "message": "Generated route with 11 waypoints covering 27.9km"
 }

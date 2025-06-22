@@ -46,7 +46,6 @@ class TSPSolver:
             """Returns the distance between the two nodes in meters."""
             from_node = self.manager.IndexToNode(from_index)
             to_node = self.manager.IndexToNode(to_index)
-<<<<<<< HEAD
             # Convert km to meters and return as integer
             return int(distance_matrix[from_node][to_node] * 1000)
         
@@ -55,14 +54,6 @@ class TSPSolver:
         
         # Add distance constraint (convert km to meters)
         max_distance_meters = int(max_distance * 1000)
-=======
-            return distance_matrix[from_node][to_node]
-
-        transit_callback_index = self.routing.RegisterTransitCallback(distance_callback)
-        self.routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
-
-        # Add distance constraint
->>>>>>> 5346f1b7ef48c131ada1a07d647a8d681851c27e
         self.routing.AddDimension(
             transit_callback_index,
             0,  # no slack

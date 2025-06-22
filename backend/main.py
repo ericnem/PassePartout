@@ -120,7 +120,7 @@ async def generate_route(request: RouteRequest):
             distance_from_prev = None
             duration_from_prev = None
             if i > 0:
-                from_idx = route_indices[i-1]
+                from_idx = route_indices[i - 1]
                 distance_from_prev = distance_matrix[from_idx][idx]
                 duration_from_prev = duration_matrix[from_idx][idx]
             if idx == 0:
@@ -137,7 +137,7 @@ async def generate_route(request: RouteRequest):
             else:
                 # POI - use fallback script to avoid rate limits
                 poi = pois[idx - 1]
-                
+
                 # Only generate AI script for the first 3 POIs to avoid rate limits
                 if i <= 3:
                     try:
@@ -148,7 +148,7 @@ async def generate_route(request: RouteRequest):
                 else:
                     # Use simple fallback script for remaining POIs
                     script = f"Here's {poi['name']}, another interesting location on your walking tour of Toronto."
-                
+
                 point = RoutePoint(
                     name=poi["name"],
                     lat=poi["lat"],
@@ -159,7 +159,9 @@ async def generate_route(request: RouteRequest):
                     duration_from_prev=duration_from_prev,
                 )
             optimized_pois.append(
-                poi if idx > 0 else {
+                poi
+                if idx > 0
+                else {
                     "name": params["start_location"],
                     "lat": start_coords["lat"],
                     "lng": start_coords["lng"],

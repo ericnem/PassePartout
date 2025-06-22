@@ -53,8 +53,9 @@ class OverpassClient:
         # Remove duplicates and limit results
         unique_pois = []
         seen_names = set()
+        cap = 10
         for poi in pois:
-            if poi["name"] not in seen_names and len(unique_pois) < 10:  # Cap at 10 POIs
+            if poi["name"] not in seen_names and len(unique_pois) < cap: 
                 unique_pois.append(poi)
                 seen_names.add(poi["name"])
         
