@@ -7,4 +7,3 @@ httpx==0.25.2
 ortools
 geojson==3.1.0
 requests==2.31.0
-mangum
