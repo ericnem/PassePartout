@@ -10,6 +10,9 @@ from pydantic import BaseModel
 
 class RouteRequest(BaseModel):
     input_text: str
+    context: Optional[List[Dict[str, str]]] = (
+        None  # Optional chat history for Gemini context
+    )
 
 
 class RoutePoint(BaseModel):

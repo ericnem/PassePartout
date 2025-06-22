@@ -34,7 +34,7 @@ class OSRMClient:
         coords = ";".join([f"{lng},{lat}" for lat, lng in points])
 
         # Use the OSRM table service for distance and duration matrix (foot profile)
-        url = f"https://router.project-osrm.org/table/v1/foot/{coords}"
+        url = f"https://router.project-osrm.org/table/v1/walk/{coords}"
         params = {"annotations": "distance,duration"}
 
         try:
@@ -62,15 +62,17 @@ class OSRMClient:
                 matrix_row_dur = []
                 for j, (distance, duration) in enumerate(zip(row_dist, row_dur)):
                     if distance is None:
+                        print("Warning: OSRM returned None for distance")
                         distance = self._haversine_distance(points[i], points[j])
                     else:
                         distance = distance / 1000  # meters to km
                     if duration is None:
+                        print("Warning: OSRM returned None for duration")
                         duration = (
                             self._haversine_distance(points[i], points[j]) / 5
                         ) * 60  # assume 5km/h
                     else:
-                        duration = duration / 60  # seconds to minutes
+                        duration = 7*(duration / 60)  # seconds to minutes
                     matrix_row_dist.append(distance)
                     matrix_row_dur.append(duration)
                 distance_matrix.append(matrix_row_dist)
