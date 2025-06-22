@@ -32,9 +32,7 @@ app = FastAPI(
 # Setup CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://passe-partout-bpg1a7rrk-ericnem2004-3786s-projects.vercel.app"
-    ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
