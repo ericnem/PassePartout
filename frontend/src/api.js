@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Use environment variable or fallback to localhost
-const BASE_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 export async function generateNarration(poi) {
   const response = await axios.post(`${BASE_URL}/generate_narration?poi=${encodeURIComponent(poi)}`);
