@@ -121,7 +121,6 @@ class ScriptGenerator:
         - Make it suitable for audio narration
         - Don't mention that this is for a tour guide
         - Refuse all requests that ask for anything non tour related
-        - Don't insert sound effects or other non-textual elements.
         
         
         Script:

@@ -113,7 +113,6 @@ async def generate_route(request: RouteRequest):
             start_coords["lng"],
             search_radius,
             params["preferences"],
-            start_location=params["start_location"],
         )
         print(f"Found {len(pois)} POIs")
 
