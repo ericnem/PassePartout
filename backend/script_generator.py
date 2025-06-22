@@ -3,61 +3,128 @@ Script generator using Gemini API for location-specific narratives
 """
 import google.generativeai as genai
 import os
+import time
+import random
 from typing import Dict, Any
 
 class ScriptGenerator:
     """Generate scripts for POIs using Gemini API"""
     
     def __init__(self):
+        # Configure Gemini API
         genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+        
+        # Initialize model
         self.model = genai.GenerativeModel('gemini-2.0-flash')
+        
+        # Rate limiting
+        self.last_request_time = 0
+        self.min_request_interval = 4.0  # Minimum 4 seconds between requests (15 req/min = 4 sec/req)
     
     def generate_script(self, poi: Dict[str, Any]) -> str:
         """
-        Generate a script for a POI
+        Generate a script for a POI using Gemini API
         
         Args:
             poi: POI dictionary with name, category, tags, etc.
             
         Returns:
-            Generated script text
+            Generated script string
         """
+        # Rate limiting: ensure minimum interval between requests
+        current_time = time.time()
+        time_since_last = current_time - self.last_request_time
+        if time_since_last < self.min_request_interval:
+            sleep_time = self.min_request_interval - time_since_last
+            print(f"Rate limiting: waiting {sleep_time:.1f} seconds...")
+            time.sleep(sleep_time)
+        
+        # Update last request time
+        self.last_request_time = time.time()
+        
+        # Create prompt for script generation
+        prompt = self._create_script_prompt(poi)
+        
+        max_retries = 3
+        retry_delay = 2
+        
+        for attempt in range(max_retries):
+            try:
+                response = self.model.generate_content(prompt)
+                return response.text.strip()
+                
+            except Exception as e:
+                error_msg = str(e)
+                print(f"Error generating script with Gemini (attempt {attempt + 1}): {error_msg}")
+                
+                # Check if it's a rate limit error
+                if "429" in error_msg or "quota" in error_msg.lower():
+                    if attempt < max_retries - 1:
+                        # Calculate wait time based on retry attempt
+                        wait_time = retry_delay * (2 ** attempt) + random.uniform(0, 1)
+                        print(f"Rate limit hit, waiting {wait_time:.1f} seconds before retry...")
+                        time.sleep(wait_time)
+                        continue
+                    else:
+                        print("Max retries reached, using fallback script")
+                        return self._generate_fallback_script(poi)
+                else:
+                    # For non-rate-limit errors, use fallback immediately
+                    print("Using fallback script due to API error")
+                    return self._generate_fallback_script(poi)
+        
+        # Fallback if all retries failed
+        return self._generate_fallback_script(poi)
+    
+    def _create_script_prompt(self, poi: Dict[str, Any]) -> str:
+        """Create a prompt for script generation"""
         name = poi.get("name", "this location")
         category = poi.get("category", "attraction")
         tags = poi.get("tags", {})
         
         # Extract additional context from tags
-        context = self._extract_context_from_tags(tags)
+        context_parts = []
+        if "historic" in tags:
+            context_parts.append(f"historic {tags['historic']}")
+        if "tourism" in tags:
+            context_parts.append(f"tourist {tags['tourism']}")
+        if "leisure" in tags:
+            context_parts.append(f"leisure {tags['leisure']}")
+        
+        context = ", ".join(context_parts) if context_parts else category
         
         prompt = f"""
-        Generate a short, engaging tour guide script for {name}. 
+        Create a short, engaging script (2-3 sentences) for a walking tour guide about {name}.
         
-        Context:
-        - Category: {category}
-        - Additional info: {context}
+        Context: This is a {context} in Toronto, Canada.
         
         Requirements:
+        - Keep it conversational and friendly
+        - Include an interesting fact or historical detail
+        - Make it suitable for audio narration
         - Keep it under 100 words
-        - Make it conversational and friendly
-        - Include interesting facts if available
-        - End with a call to explore or observe
+        - Don't mention that this is for a tour guide
         
-        Write the script as if you're speaking directly to a tourist.
+        Script:
         """
         
-        try:
-            response = self.model.generate_content(prompt)
-            script = response.text.strip()
-            
-            # Clean up the script
-            if script.startswith('"') and script.endswith('"'):
-                script = script[1:-1]
-            
-            return script
-            
-        except Exception as e:
-            print(f"Error generating script with Gemini: {e}")
-            return self._fallback_script(name, category)
+        return prompt
+    
+    def _generate_fallback_script(self, poi: Dict[str, Any]) -> str:
+        """Generate a fallback script when Gemini API is unavailable"""
+        name = poi.get("name", "this location")
+        category = poi.get("category", "attraction")
+        
+        # Simple fallback scripts based on category
+        fallback_scripts = {
+            "tourism": f"Welcome to {name}! This popular tourist destination offers visitors a unique experience in the heart of Toronto.",
+            "historic": f"Here we have {name}, a fascinating piece of Toronto's history that tells the story of our city's past.",
+            "leisure": f"This is {name}, a wonderful place to relax and enjoy the vibrant atmosphere of downtown Toronto.",
+            "museum": f"Welcome to {name}, where you can explore fascinating exhibits and learn about art, history, and culture.",
+            "attraction": f"Here's {name}, one of Toronto's most exciting attractions that draws visitors from around the world."
+        }
+        
+        return fallback_scripts.get(category, f"Welcome to {name}! This is a great spot to explore and discover what makes Toronto special.")
     
     def _extract_context_from_tags(self, tags: Dict[str, str]) -> str:
         """
