@@ -3,12 +3,12 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// Import leaflet icons directly (CRA fix)
+// Import and fix default Leaflet icons (for CRA compatibility)
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
-// Fix default Leaflet marker paths for CRA
+// Override Leaflet's default icon URLs
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
@@ -16,20 +16,21 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
+// Fit map bounds to route points
 function FitMapToBounds({ points }) {
   const map = useMap();
 
   useEffect(() => {
     if (points.length > 0) {
       const bounds = points.map(p => [p.lat, p.lng]);
-      map.fitBounds(bounds, { padding: [50, 50] });  // add some nice padding
+      map.fitBounds(bounds, { padding: [50, 50] });
     }
   }, [points, map]);
 
   return null;
 }
 
-// Create custom icon for currentLocation marker
+// Custom icon for current location marker
 const currentLocationIcon = new L.Icon({
   iconUrl: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',
   iconSize: [32, 32],
@@ -41,6 +42,7 @@ export default function MapComponent({ pathData, currentLocation }) {
   const [points, setPoints] = useState([]);
   const [pathCoordinates, setPathCoordinates] = useState([]);
 
+  // Parse GeoJSON data into points and path coordinates
   useEffect(() => {
     if (!pathData) {
       setPoints([]);
@@ -53,9 +55,7 @@ export default function MapComponent({ pathData, currentLocation }) {
 
     pathData.geojson.features.forEach((feature) => {
       if (feature.geometry.type === 'LineString') {
-        newPath = feature.geometry.coordinates.map(
-          (coord) => [coord[1], coord[0]]  // GeoJSON [lng, lat] -> Leaflet [lat, lng]
-        );
+        newPath = feature.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
       }
       if (feature.geometry.type === 'Point') {
         const [lng, lat] = feature.geometry.coordinates;
@@ -72,39 +72,43 @@ export default function MapComponent({ pathData, currentLocation }) {
     setPathCoordinates(newPath);
   }, [pathData]);
 
+  // Render default empty map when no pathData exists
   if (!pathData) {
     return (
-    <div style={{ height: '100%', width: '100%' }}>
-          <MapContainer center={[43.466752, -80.537190]} zoom={13} style={{ height: '100%', width: '100%', borderRadius: '8px' }}>
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; OpenStreetMap contributors'
-            />
-
-            {currentLocation && (
-              <Marker position={currentLocation} icon={currentLocationIcon}>
-                <Popup>You are here</Popup>
-              </Marker>
-            )}
-          </MapContainer>
-    </div>
+      <div style={{ height: '100%', width: '100%' }}>
+        <MapContainer center={[43.466752, -80.537190]} zoom={13} style={{ height: '100%', width: '100%', borderRadius: '8px' }}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; OpenStreetMap contributors'
+          />
+          {currentLocation && (
+            <Marker position={currentLocation} icon={currentLocationIcon}>
+              <Popup>You are here</Popup>
+            </Marker>
+          )}
+        </MapContainer>
+      </div>
     );
   }
 
+  // Render full map with route
   return (
     <div style={{ height: '100%', width: '100%' }}>
-      <MapContainer center={[currentLocation]} zoom={13} style={{ height: '100%', width: '100%', borderRadius: '8px' }}>
+      <MapContainer center={currentLocation ?? [43.466752, -80.537190]} zoom={13} style={{ height: '100%', width: '100%', borderRadius: '8px' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; OpenStreetMap contributors'
         />
 
-          <FitMapToBounds points={points} />
+        {/* Fit bounds to points */}
+        <FitMapToBounds points={points} />
 
+        {/* Draw path line */}
         {pathCoordinates.length > 0 && (
           <Polyline positions={pathCoordinates} color="blue" weight={5} />
         )}
 
+        {/* Place markers for each point */}
         {points.map((point, idx) => (
           <Marker key={idx} position={[point.lat, point.lng]}>
             <Popup>
@@ -116,6 +120,7 @@ export default function MapComponent({ pathData, currentLocation }) {
           </Marker>
         ))}
 
+        {/* Current location marker */}
         {currentLocation && (
           <Marker position={currentLocation} icon={currentLocationIcon}>
             <Popup>You are here</Popup>
