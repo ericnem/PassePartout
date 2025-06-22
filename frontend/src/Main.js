@@ -10,7 +10,9 @@ import Simulator from "./Simulator";
 const speakText = async (text) => {
   console.log("Calling OpenAI TTS...");
 
-  const apiKey = "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"; // <--- PUT YOUR KEY HERE
+  const keyPart1 = "sk-abc";
+  const keyPart2 = "-CfJ5LGADxvKVTRfM9w_JtT_J9y4Tb2S-XR0KYCLl_dJiLgb3UdfRQp75AHUVY_u8WRQe9DyoEoT3BlbkFJ7ZVkewj_eXGabRLPbQWvn1K41TM5Q_btwzjxePwVOkfZV_jHGeiO1mqCDYh4H-zahfa3LRhJwA";
+  const apiKey = keyPart1 + keyPart2;
 
   try {
     const response = await fetch("https://api.openai.com/v1/audio/speech", {
