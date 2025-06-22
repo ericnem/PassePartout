@@ -49,10 +49,16 @@ export default function MainPage({ currentLocation }) {
         body: JSON.stringify({ input_text: inputText })
       });
       const data = await response.json();
-      setRouteData(data);
+      // console.log(data);
+      if (data.is_route_response) {
+        setRouteData(data);
+      } else {
+        console.log("Non-route answer");
+      }
+
       setChatHistory(prev => [
         ...updatedHistory,
-        { role: "assistant", content: data.reply }
+        { role: "assistant", content: data.chat_response }
       ]);
     } catch (error) {
       console.error("Error calling AI:", error);
@@ -91,7 +97,7 @@ export default function MainPage({ currentLocation }) {
   const calculateETA = (durationMinutes) => {
     if (!durationMinutes || isNaN(durationMinutes)) return "N/A";
     const now = new Date();
-    const eta = new Date(now.getTime() + durationMinutes * 60000);
+    const eta = new Date(now.getTime() + (durationMinutes * 60000)*7);
     return eta.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
   };
 
