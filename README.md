@@ -1,6 +1,6 @@
 # PassePartout AI
 
-PassePartout AI is a context-aware, audio-first tour guide web application that leverages advanced AI to generate personalized walking routes and engaging, narrated scripts for points of interest (POIs). The project combines natural language understanding, real-time mapping, and generative AI to deliver a unique, interactive city exploration experience.
+PassePartout AI is a context-aware, audio-first tour guide web application that leverages advanced AI to generate personalized walking routes and engaging, narrated scripts for points of interest (POIs). The project combines natural language understanding, real-time mapping, and generative AI to deliver a unique, interactive city exploration experience. See it in action: https://passe-partout.vercel.app/
 
 ## Features
 - **AI-Powered Route Generation:** Users can request custom walking tours using natural language. The backend parses requests, geocodes locations, and finds relevant POIs.
