@@ -2,15 +2,37 @@ import React, { useState, useEffect } from "react";
 import MapComponent from "./MapComponent";
 import TextBox from "./TextBox";
 import ChatWindow from "./ChatWindow";
+import WeatherComponent from "./WeatherComp";
+
+const calculateCalories = (distanceKm, durationMinutes, userWeightKg = 70) => {
+    // Average walking speed: 5 km/h (moderate pace)
+    const walkingSpeedKmh = 5;
+    
+    // MET (Metabolic Equivalent of Task) for walking at moderate pace
+    // Adjust MET based on terrain and pace
+    let metValue = 3.5; // Moderate walking on flat ground
+  
+    // Calculate actual walking time in hours
+    const walkingTimeHours = durationMinutes / 60;
+    
+    // Calculate calories using the formula: Calories = MET × Weight (kg) × Time (hours)
+    const calories = Math.round(metValue * userWeightKg * walkingTimeHours);
+    
+    return calories;
+  };
 
 export default function MainPage({ currentLocation }) {
   const [useCurrentLocation, setUseCurrentLocation] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [routeData, setRouteData] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
+  const [weatherLoading, setWeatherLoading] = useState(false);
+  const [calories, setCalories] = useState(null)
 
   useEffect(() => {
     if (routeData) {
       console.log("Route data updated!", routeData);
+      setCalories(calculateCalories(routeData.total_distance_km, routeData.estimated_duration_minutes));
     }
   }, [routeData]);
 
@@ -37,6 +59,35 @@ export default function MainPage({ currentLocation }) {
     }
   };
 
+  useEffect(() => {
+    if (currentLocation && currentLocation[0] && currentLocation[1]) {
+      fetchWeatherData(currentLocation[0], currentLocation[1]);
+    }
+  }, [currentLocation]);
+
+  const fetchWeatherData = async (lat, lng) => {
+    setWeatherLoading(true);
+    try {
+      const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY || '429786abfd1c8dc244cd9c6eecd024bc';
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setWeatherData(data);
+      } else {
+        console.error('Failed to fetch weather data');
+        setWeatherData(null);
+      }
+    } catch (error) {
+      console.error('Error fetching weather:', error);
+      setWeatherData(null);
+    } finally {
+      setWeatherLoading(false);
+    }
+  };
+
   const calculateETA = (durationMinutes) => {
     if (!durationMinutes || isNaN(durationMinutes)) return "N/A";
     const now = new Date();
@@ -45,28 +96,22 @@ export default function MainPage({ currentLocation }) {
   };
 
   return (
-    <div style={{ height: "100vh", display: "flex", flexDirection: "column", background: "#f9fafb" }}>
-      <header style={{ background: "white", borderBottom: "1px solid #ddd", padding: "0.5rem 1rem", textAlign: "center" }}>
-        <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Name</h1>
-      </header>
-
+    <div style={{ max_height: "100vh", display: "flex", flexDirection: "column", background: "#f9fafb" }}>
       <div style={{ flex: 1, display: "flex", gap: "1rem", padding: "1rem"}}>
         <div style={{ width: "250px", display: "flex", flexDirection: "column", gap: "1rem"}}>
 
-          {/* Trip Info */}
           <div style={{ border: "1px solid orange", borderRadius: "8px", padding: "1rem", boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}>
             <h3>Trip Info</h3>
             {routeData?.route ? (
               <>
                 <p>Distance: {routeData.route.total_distance_km?.toFixed(1) ?? 'N/A'} km</p>
                 <p>ETA: {calculateETA(routeData.route.estimated_duration_minutes)}</p>
-                <p>Calories: 500 Kcal</p>
+                <p>Calories: {calories ? `${calories} Kcal` : 'Calculating...'}</p>
               </>
             ) : (
               <p>No route generated yet.</p>
             )}
           </div>
-
           {/* Route Points */}
           <div style={{ border: "1px solid orange", borderRadius: "8px", padding: "1rem", boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
             <h3>Route</h3>
@@ -152,20 +197,13 @@ export default function MainPage({ currentLocation }) {
               )}
             </div>
           </div>
-
-          <div style={{ border: "1px solid #ccc", borderRadius: "8px", padding: "1rem" }}>
-            <label>
-              <input
-                type="checkbox"
-                checked={useCurrentLocation}
-                onChange={(e) => setUseCurrentLocation(e.target.checked)}
-              />{" "}
-              Use Current Location
-            </label>
-          </div>
+          <WeatherComponent
+            weatherData={weatherData}
+            weatherLoading={weatherLoading}
+            currentLocation={currentLocation}
+          />
         </div>
 
-        {/* Map */}
         <div style={{ flex: 1, border: "2px solid #ccc", borderRadius: "8px", position: "relative" }}>
           <MapComponent 
             key={routeData?.route?.id ?? "empty"}
@@ -174,12 +212,15 @@ export default function MainPage({ currentLocation }) {
           />
         </div>
 
-        {/* Chat */}
-        <div style={{ width: "300px", border: "1px solid #ccc", borderRadius: "8px", padding: "1rem" }}>
-          <ChatWindow chatHistory={chatHistory}/>
-          <TextBox onSubmit={handleAIRequest} />
+        <div style={{ width: "300px", display: "flex", flexDirection: "column", gap: "1rem" }}>
+
+          <div style={{ border: "1px solid #ccc", borderRadius: "8px", padding: "1rem" }}>
+            <ChatWindow chatHistory={chatHistory}/>
+            <TextBox onSubmit={handleAIRequest} />
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
