@@ -10,15 +10,11 @@ import Simulator from "./Simulator";
 const speakText = async (text) => {
   console.log("Calling OpenAI TTS...");
 
-  const keyPart1 = "sk-abc";
-  const keyPart2 = "-CfJ5LGADxvKVTRfM9w_JtT_J9y4Tb2S-XR0KYCLl_dJiLgb3UdfRQp75AHUVY_u8WRQe9DyoEoT3BlbkFJ7ZVkewj_eXGabRLPbQWvn1K41TM5Q_btwzjxePwVOkfZV_jHGeiO1mqCDYh4H-zahfa3LRhJwA";
-  const apiKey = keyPart1 + keyPart2;
-
   try {
     const response = await fetch("https://api.openai.com/v1/audio/speech", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${apiKey}`,
+        "Authorization": `Bearer ${"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"}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -86,13 +82,14 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
   const [calories, setCalories] = useState(null);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [roamEnabled, setRoamEnabled] = useState(false);
+  const [apiKey, setApiKey] = useState(null);
 
   // Speech trigger on proximity
   useEffect(() => {
     if (!currentLocation || !audioEnabled) return;
     const nearbyPoint = findNearbyPointIndex(routeData, currentLocation);
     if (nearbyPoint !== -1 && routeData?.points?.[nearbyPoint]?.script) {
-      speakText(routeData.points[nearbyPoint].script);
+      speakText(routeData.points[nearbyPoint].script, apiKey);
     }
   }, [currentLocation, audioEnabled]);
 
@@ -114,7 +111,7 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
         });
         const data = await response.json();
         if (data.summary) {
-          speakText(data.summary);
+          speakText(data.summary, apiKey);
           setChatHistory(prev => [...prev, { role: "assistant", content: data.summary }]);
         }
       } catch (error) {
@@ -260,7 +257,7 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
             <ChatWindow chatHistory={chatHistory} />
             <TextBox onSubmit={handleAIRequest} />
           </div>
-          <VoiceWindow audioEnabled={audioEnabled} setAudioEnabled={setAudioEnabled} roamEnabled={roamEnabled} setRoamEnabled={setRoamEnabled} />
+          <VoiceWindow audioEnabled={audioEnabled} setAudioEnabled={setAudioEnabled} roamEnabled={roamEnabled} setRoamEnabled={setRoamEnabled}/>
           <Simulator currentLocation={currentLocation} setCurrentLocation={setCurrentLocation} />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function VoiceWindow({audioEnabled, setAudioEnabled, roamEnabled, setRoamEnabled}) {
+export default function VoiceWindow({ audioEnabled, setAudioEnabled, roamEnabled, setRoamEnabled}) {
 
   const toggleAudio = () => {
     setAudioEnabled(prev => !prev);
@@ -9,6 +9,12 @@ export default function VoiceWindow({audioEnabled, setAudioEnabled, roamEnabled,
   const toggleRoam = () => {
     setRoamEnabled(prev => !prev);
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();  // prevent page refresh
+    const apiKey = e.target.elements.apiKeyInput.value;
+    setApiKey(apiKey);
+  };
 
   return (
     <div style={{
@@ -33,10 +39,11 @@ export default function VoiceWindow({audioEnabled, setAudioEnabled, roamEnabled,
           style={{ transform: 'scale(1.5)' }}
         />
       </div>
+
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <label htmlFor="roamToggle" style={{ fontSize: '1rem' }}>Enable Roaming:</label>
         <input
-          id="audioToggle"
+          id="roamToggle"
           type="checkbox"
           checked={roamEnabled}
           onChange={toggleRoam}
