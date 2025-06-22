@@ -74,15 +74,26 @@ export default function MapComponent({ pathData, currentLocation }) {
 
   if (!pathData) {
     return (
-      <div style={{ padding: "2rem", textAlign: "center" }}>
-        Please submit a request to generate a route.
-      </div>
+    <div style={{ height: '100%', width: '100%' }}>
+          <MapContainer center={[43.466752, -80.537190]} zoom={13} style={{ height: '100%', width: '100%', borderRadius: '8px' }}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; OpenStreetMap contributors'
+            />
+
+            {currentLocation && (
+              <Marker position={currentLocation} icon={currentLocationIcon}>
+                <Popup>You are here</Popup>
+              </Marker>
+            )}
+          </MapContainer>
+    </div>
     );
   }
 
   return (
     <div style={{ height: '100%', width: '100%' }}>
-      <MapContainer center={[43.6426, -79.3871]} zoom={13} style={{ height: '100%', width: '100%', borderRadius: '8px' }}>
+      <MapContainer center={[currentLocation]} zoom={13} style={{ height: '100%', width: '100%', borderRadius: '8px' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; OpenStreetMap contributors'

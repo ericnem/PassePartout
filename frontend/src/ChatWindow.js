@@ -5,15 +5,18 @@ export default function ChatWindow({ chatHistory }) {
     <div style={{
       maxHeight: '300px',
       overflowY: 'auto',
-      padding: '1rem',
-      margin: '1rem 0',
+      padding: '0.1rem 1rem',
+      margin: '1rem 0.5',
+      marginBottom: '1rem',
       maxWidth: '90%',
       backgroundColor: '#f1f1f1',
       borderRadius: '8px',
-      wordBreak: 'break-word'
+      wordBreak: 'break-word',
+      flex: 1, 
     }}>
       {chatHistory.map((message, idx) => (
         <div key={idx} style={{
+          marginTop:'0.5rem',
           marginBottom: '1rem',
           textAlign: message.role === 'user' ? 'right' : 'left'
         }}>

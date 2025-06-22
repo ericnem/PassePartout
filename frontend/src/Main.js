@@ -213,7 +213,7 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
   };
 
   return (
-    <div style={{ maxHeight: "100vh", height: "100vh", display: "flex", flexDirection: "column", background: "#f9fafb" }}>
+    <div style={{ height: "100vh", overflow: "hidden", display: "flex", flexDirection: "column" }}>
       <div style={{ flex: 1, display: "flex", gap: "1rem", padding: "1rem"}}>
         <div style={{ width: "250px", display: "flex", flexDirection: "column", gap: "1rem"}}>
 
@@ -223,7 +223,6 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
               <>
                 <p>Distance: {routeData.route.total_distance_km?.toFixed(1) ?? 'N/A'} km</p>
                 <p>ETA: {calculateETA(routeData.route.estimated_duration_minutes)}</p>
-                <p>Calories: {calories ? `${calories} Kcal` : 'Calculating...'}</p>
               </>
             ) : (
               <p>No route generated yet.</p>
@@ -331,7 +330,7 @@ export default function MainPage({ currentLocation, setCurrentLocation }) {
 
         <div style={{ width: "300px", display: "flex", flexDirection: "column", gap: "1rem" }}>
 
-          <div style={{ border: "1px solid #ccc", borderRadius: "8px", padding: "1rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", height: "50vh", border: "1px solid #ccc", borderRadius: "8px", padding: "1rem" }}>
             <ChatWindow chatHistory={chatHistory}/>
             <TextBox onSubmit={handleAIRequest} />
           </div>

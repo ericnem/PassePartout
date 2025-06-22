@@ -26,7 +26,7 @@ export default function TextBox({ onSubmit }) {
       maxWidth: '600px',
       margin: '0 auto'
     }}>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', width: '100%' }}>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', width: '100%', display: 'flex', alignItems: 'center', topPadding: '0.5rem'  }}>
         <input
           type="text"
           value={input}
@@ -38,7 +38,7 @@ export default function TextBox({ onSubmit }) {
             border: '1px solid #ccc',
             borderRadius: '8px',
             fontSize: '1rem',
-            marginRight: '0.5rem'
+            marginRight: '0.5rem',
           }}
         />
         <button
