@@ -11,12 +11,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from geojson import Feature, FeatureCollection, LineString, Point
 
 # Import our modules
-from models import RoutePoint, RouteRequest, RouteResponse
+from models import RoutePoint, RouteRequest, RouteResponse, RoamRequest, RoamResponse
 from osrm_client import OSRMClient
 from overpass_client import OverpassClient
 from script_generator import ScriptGenerator
 from text_parser import TextParser
 from tsp_solver import TSPSolver
+from roam_service import RoamService
 
 load_dotenv()
 
@@ -42,6 +43,7 @@ overpass_client = OverpassClient()
 osrm_client = OSRMClient()
 tsp_solver = TSPSolver()
 script_generator = ScriptGenerator()
+roam_service = RoamService()
 
 
 @app.get("/")
@@ -49,7 +51,10 @@ def read_root():
     return {
         "message": "EarSightAI Backend running!",
         "version": "1.0.0",
-        "endpoints": {"generate_route": "POST /generate-route"},
+        "endpoints": {
+            "generate_route": "POST /generate-route",
+            "roam": "POST /roam"
+        },
     }
 
 
@@ -245,6 +250,76 @@ def create_geojson(points: list[RoutePoint], route_details: dict) -> dict:
         features.append(route_feature)
 
     return FeatureCollection(features)
+
+
+@app.post("/roam", response_model=RoamResponse)
+async def roam(request: RoamRequest):
+    """
+    Get AI-generated summary of nearby Points of Interest
+    
+    Args:
+        request: RoamRequest containing lat, lon, and optional tags
+        
+    Returns:
+        RoamResponse with summary and source POIs
+    """
+    try:
+        print(f"Roam request: lat={request.lat}, lon={request.lon}, tags={request.tags}")
+        
+        # Validate coordinates
+        if not (-90 <= request.lat <= 90):
+            raise HTTPException(status_code=400, detail="Latitude must be between -90 and 90")
+        if not (-180 <= request.lon <= 180):
+            raise HTTPException(status_code=400, detail="Longitude must be between -180 and 180")
+        
+        # Get roam response with fallback
+        response = await roam_service.get_roam_with_fallback(request)
+        
+        print(f"Roam response generated: {len(response.source)} POIs found")
+        return response
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error in roam endpoint: {e}")
+        raise HTTPException(status_code=500, detail=f"Error generating roam response: {str(e)}")
+
+
+@app.get("/roam/cache/stats")
+async def get_roam_cache_stats():
+    """
+    Get cache statistics for the Roam feature
+    
+    Returns:
+        Dictionary with cache statistics
+    """
+    try:
+        stats = roam_service.get_cache_stats()
+        return {"cache_stats": stats}
+    except Exception as e:
+        print(f"Error getting cache stats: {e}")
+        raise HTTPException(status_code=500, detail=f"Error getting cache stats: {str(e)}")
+
+
+@app.delete("/roam/cache")
+async def clear_roam_cache():
+    """
+    Clear all Roam feature cache entries
+    
+    Returns:
+        Success message
+    """
+    try:
+        success = await roam_service.clear_cache()
+        if success:
+            return {"message": "Cache cleared successfully"}
+        else:
+            raise HTTPException(status_code=500, detail="Failed to clear cache")
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error clearing cache: {e}")
+        raise HTTPException(status_code=500, detail=f"Error clearing cache: {str(e)}")
 
 
 @app.get("/health")
