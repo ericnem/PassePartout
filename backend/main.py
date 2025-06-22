@@ -113,7 +113,6 @@ async def generate_route(request: RouteRequest):
             start_coords["lng"],
             search_radius,
             params["preferences"],
-            start_location=params["start_location"],
         )
         print(f"Found {len(pois)} POIs")
 
@@ -162,19 +161,13 @@ async def generate_route(request: RouteRequest):
                     duration_from_prev=duration_from_prev,
                 )
             else:
-                # POI - use fallback script to avoid rate limits
+                # POI - always generate AI script, no fallback
                 poi = pois[idx - 1]
-
-                # Only generate AI script for the first 3 POIs to avoid rate limits
-                if i <= 3:
-                    try:
-                        script = script_generator.generate_script(poi, context=context)
-                    except Exception as e:
-                        print(f"Using fallback script for {poi['name']}: {e}")
-                        script = f"Welcome to {poi['name']}! This is a great spot to explore and discover what makes Toronto special."
-                else:
-                    # Use simple fallback script for remaining POIs
-                    script = f"Here's {poi['name']}, another interesting location on your walking tour of Toronto."
+                try:
+                    script = script_generator.generate_script(poi, context=context)
+                except Exception as e:
+                    print(f"AI script generation failed for {poi['name']}: {e}")
+                    script = "[AI script unavailable]"
 
                 point = RoutePoint(
                     name=poi["name"],
